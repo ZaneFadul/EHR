@@ -29,54 +29,54 @@ const server = httpServer.listen(port, function () {
     console.log(`listening at port: ${port}`);
 });
 
-//test DB schema put in input module in future
-const testSchema = new mongoose.Schema({
-    username: {
-      type: String,
-      required: [true, 'Username is required']
-    },
-    created: {
-      type: Date,
-      required: [true, 'Created date is required']
-    }
-  })
+// //test DB schema put in input module in future
+// const testSchema = new mongoose.Schema({
+//     username: {
+//       type: String,
+//       required: [true, 'Username is required']
+//     },
+//     created: {
+//       type: Date,
+//       required: [true, 'Created date is required']
+//     }
+//   })
   
 
-//Connected server to MongoDB Atlas
-const connectionString =  "mongodb+srv://aliu:pass@ehr-test.d1mre.mongodb.net/EHR-TEST?retryWrites=true&w=majority";
-const User = mongoose.model('user', userSchema, 'user');
+// //Connected server to MongoDB Atlas
+// const connectionString =  "mongodb+srv://aliu:pass@ehr-test.d1mre.mongodb.net/EHR-TEST?retryWrites=true&w=majority";
+// const User = mongoose.model('user', testSchema, 'user');
 
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
-mongoose.set('useUnifiedTopology', true);
-//test database insert/find user node ./index.js --user=bob
-async function createUser(username) {
-    return new User({
-      username,
-      created: Date.now()
-    }).save()
-  }
+// mongoose.set('useNewUrlParser', true);
+// mongoose.set('useFindAndModify', false);
+// mongoose.set('useCreateIndex', true);
+// mongoose.set('useUnifiedTopology', true);
+// //test database insert/find user node ./index.js --user=bob
+// async function createUser(username) {
+//     return new User({
+//       username,
+//       created: Date.now()
+//     }).save()
+//   }
   
-  async function findUser(username) {
-    return await User.findOne({ username })
-  }
+//   async function findUser(username) {
+//     return await User.findOne({ username })
+//   }
   
-  ;(async () => {
-    const connector = mongoose.connect(connectionString)
-    const username = process.argv[2].split('=')[1]
+//   ;(async () => {
+//     const connector = mongoose.connect(connectionString)
+//     const username = process.argv[2].split('=')[1]
   
-    let user = await connector.then(async () => {
-      return findUser(username)
-    })
+//     let user = await connector.then(async () => {
+//       return findUser(username)
+//     })
   
-    if (!user) {
-      user = await createUser(username)
-    }
+//     if (!user) {
+//       user = await createUser(username)
+//     }
   
-    console.log(user)
-    process.exit(0)
-  })()
+//     console.log(user)
+//     process.exit(0)
+//   })()
 
 
 
