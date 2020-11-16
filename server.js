@@ -85,6 +85,13 @@ app.get("/test", function(req, res){
     res.send({ express: 'ITS ALIVE!' });
 });
 
+// import classes and mongoDB components
+const org = require('./app/models/organizations');
+
+const splice = new org.orgs(0,'SPLICE', 'Club', 'test');
+console.log("TEST", splice.data);
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
