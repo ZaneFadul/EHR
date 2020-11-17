@@ -93,8 +93,8 @@ console.log("TEST", splice.data);
 
 const pat = require('./app/models/patient');
 
-const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
-console.log("TEST", splice.all);
+//const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
+//console.log("TEST", splice.all);
 
 
 // catch 404 and forward to error handler

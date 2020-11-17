@@ -1,11 +1,16 @@
 
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import theme from './Constants/theme';
+import Header from './Components/Header';
 import './App.css';
+
+
+let mode = 'lightMode';
+let colorTheme = theme.mainColors[mode];
 
 class App extends Component {
 state = {
-    data: null
+  data: null
   };
 
   componentDidMount() {
@@ -27,12 +32,11 @@ state = {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        {/* Render the newly fetched data inside of this.state.data  */}
+      <div className="App" style={{
+        background: `linear-gradient(${colorTheme['background-top-gradient']},${colorTheme['background-bottom-gradient']})`,
+        color:`${colorTheme['main-text']}`
+      }}>
+        <Header />
         <p className="App-intro">{this.state.data}</p>
       </div>
     );
