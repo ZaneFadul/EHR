@@ -91,6 +91,11 @@ const org = require('./app/models/organizations');
 const splice = new org.orgs(0,'SPLICE', 'Club', 'test');
 console.log("TEST", splice.data);
 
+const pat = require('./app/models/patient');
+
+const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
+console.log("TEST", splice.all);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

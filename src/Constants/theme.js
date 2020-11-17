@@ -1,1 +1,0 @@
-//theme.js is meant to keep information such as color codes in one place

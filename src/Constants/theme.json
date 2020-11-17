@@ -1,0 +1,29 @@
+{
+  "theme":
+  {
+    "black":"",
+    "white":"",
+    "":""
+  },
+  "roleColors":
+  {
+    "patient":
+    {
+      "primary":"",
+      "secondary":"",
+      "accent":""
+    },
+    "staff":
+    {
+      "primary":"",
+      "secondary":"",
+      "accent":""
+    },
+    "insurance":
+    {
+      "primary":"",
+      "secondary":"",
+      "accent":""
+    }
+  }
+}
