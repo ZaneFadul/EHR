@@ -85,11 +85,11 @@ app.get("/test", function(req, res){
     res.send({ express: 'ITS ALIVE!' });
 });
 
+// import classes and mongoDB components
+const org = require('./app/models/organizations');
 
-
-
-
-
+const splice = new org.orgs(0,'SPLICE', 'Club', 'test');
+console.log("TEST", splice.data);
 
 const pat = require('./app/models/patient');
 
