@@ -1,5 +1,6 @@
 .Header-logo{
   width:70px;
+  position: absolute;
 }
 .Header-menu {
   display: flex;
@@ -7,7 +8,12 @@
   padding-bottom: 3%;
   padding-left: 6%;
   padding-right: 6%;
-  margin: 10px;
+}
+
+.Header-menu-item{
+  font-size: 2.5vh;
+  padding: 1vh;
+  padding-top: 0;
 }
 
 @keyframes logo-hover-true{
