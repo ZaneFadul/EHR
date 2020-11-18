@@ -36,7 +36,7 @@ state = {
         background: `linear-gradient(${colorTheme['background-top-gradient']},${colorTheme['background-bottom-gradient']})`,
         color:`${colorTheme['main-text']}`
       }}>
-        <Header />
+        <Header role='patient'/>
         <p className="App-intro">{this.state.data}</p>
       </div>
     );

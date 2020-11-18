@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import theme from '../Constants/theme';
+import './Header.css';
+import Menu from './Menu';
 
 export default class Header extends Component{
   constructor(props) {
@@ -10,7 +13,10 @@ export default class Header extends Component{
 
   render() {
     return (
-      <div>Poopie</div>
+      <div className="Header" style={{
+        borderColor : `${theme.roleColors[this.props.role]['primary']}`}}>
+          <Menu />
+      </div>
     );
   }
 }

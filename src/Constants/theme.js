@@ -17,8 +17,8 @@ const theme = {
   {
     "patient":
     {
-      "primary": "#0B71E0",
-      "secondary": "#094FAD",
+      "primary": "#094FAD",
+      "secondary": "#0B71E0",
       "accent": "#0B71E0"
     },
     "staff":
