@@ -4,7 +4,6 @@ import theme from './Constants/theme';
 import Header from './Components/Header';
 import './App.css';
 
-
 let mode = 'lightMode';
 let colorTheme = theme.mainColors[mode];
 

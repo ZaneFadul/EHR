@@ -27,8 +27,8 @@ export default class HeaderMenu extends Component {
     
     return (
       <div className="Header-menu">
-        <p className="Header-menu-item">Dashboard</p>
-        <p className="Header-menu-item">About</p>
+        <button className="Header-menu-item">Dashboard</button>
+        <button className="Header-menu-item">About</button>
       <img src={Logo} alt="none"
         className="Header-logo"
         onMouseOver={this.toggleLogoPop}
