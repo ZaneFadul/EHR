@@ -82,11 +82,14 @@ async function createOrganization(){
         useCreateIndex: true
     });
 
+    //test queries
     let user = await connector.then(async() => {
         return patient.findOne({name: "00"}, "name allergies");
     });
 
-    
+    let org = await connector.then(async() => {
+        return patient.findOne({name: "SPLICE"}, "name type");
+    });
 
     if (!user){
         console.log("user created")
@@ -96,7 +99,16 @@ async function createOrganization(){
         console.log("user already exists");
     }
 
-    console.log(user);
+    if (!org){
+        console.log("org created")
+        org = await createOrganization();
+    }
+    else{
+        console.log("user already exists");
+    }
+
+    console.log(`NEW USER: ${user}`);
+    console.log(`NEW ORG: ${org}`);
 })();
 
 patient.find(function(err, Patient){
