@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import theme from './Constants/theme';
 import Header from './Components/Header';
 import './App.css';
@@ -31,13 +32,15 @@ state = {
 
   render() {
     return (
+      <Router>
       <div className="App" style={{
         background: `linear-gradient(${colorTheme['background-top-gradient']},${colorTheme['background-bottom-gradient']})`,
         color:`${colorTheme['main-text']}`
       }}>
         <Header role='patient'/>
         <p className="App-intro">{this.state.data}</p>
-      </div>
+        </div>
+      </Router>
     );
   }
 }
