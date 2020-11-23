@@ -37,23 +37,66 @@ app.get("/test", function(req, res){
 // import classes and mongoDB components
 const org = require('./app/models/organizations');
 
-const splice = new org.orgs(0,'SPLICE', 'Club', 'test');
-console.log("TEST", splice.data);
+// const splice = new org.orgs(0,'SPLICE', 'Club', 'test');
+// console.log("TEST", splice.data);
 
 const pat = require('./app/models/patient');
 
-const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
-console.log("TEST", splice.all);
+// const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
+// console.log("TEST", splice.all);
 
 //Connected server to MongoDB Atlas
-const connectionString =  "mongodb+srv://aliu:pass@ehr-test.d1mre.mongodb.net/EHR-TEST?retryWrites=true&w=majority";
+const connectionString =  "mongodb://aliu:pass@ehr-test-shard-00-00.d1mre.mongodb.net:27017,ehr-test-shard-00-01.d1mre.mongodb.net:27017,ehr-test-shard-00-02.d1mre.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-c40bxx-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-await mongoose.connect(connectionString,{}
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true
-});
+const patient = mongoose.model('Patient', pat.schema_patient);
+
+async function createPatient(){ 
+    return new patient({
+        name: '00',
+        birth_date: new Date(),
+        gender: "Male",
+        address: "address",
+        allergies: ["peanut", "bananer"],
+        disabilities: ["N/A"],
+        health_records: ["TEST"],
+        visitation_records: ["TEST"],
+        payment_records: ["TEST"],
+        appointments: ["TEST"],
+        healthcare_plans: ["TEST"]
+    }).save()
+}
+
+;(async () =>{
+    
+    const connector = mongoose.connect(connectionString,{
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+    });
+
+    let user = await connector.then(async() => {
+        return patient.findOne({name: "00"}, "name allergies");
+    });
+
+    if (!user){
+        console.log("user created")
+        user = await createPatient();
+    }
+    else{
+        console.log("user already exists");
+    }
+
+    console.log(user);
+})();
+
+patient.find(function(err, Patient){
+    if (err) return console.error(err);
+    console.log(Patient);
+})
+
+
+
 
 
 // catch 404 and forward to error handler
