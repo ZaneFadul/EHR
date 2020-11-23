@@ -5,6 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const dotenv = require("dotenv").config();
 
 const app = express();
 const httpServer = http.Server(app);
@@ -13,6 +14,13 @@ const httpServer = http.Server(app);
 // app.set('views', path.join(__dirname, 'src'));
 // app.set('view engine', 'jsx');
 // app.engine('jsx', require('express-react-views').createEngine());
+
+const hostname = process.env.HOST;
+const DB_name = process.env.DATABASE;
+const PORT = process.env.PORT;
+
+const mongoDB_user = process.env.ATLAS_NAME;
+const mongoDB_pass = process.env.ATLAS_PASS;
 
 //Display server packets
 app.use(logger('dev'));
@@ -33,6 +41,8 @@ const server = httpServer.listen(port, function () {
 app.get("/test", function(req, res){
     res.send({ express: 'ITS ALIVE!' });
 });
+
+
 
 // import classes and mongoDB components
 const org = require('./app/models/organizations');
