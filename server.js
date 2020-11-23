@@ -78,18 +78,6 @@ const server = httpServer.listen(port, function () {
 //     process.exit(0)
 //   })()
 
-
-
-//rendering pages
-app.get("/test", function(req, res){
-    res.send({ express: 'ITS ALIVE!' });
-});
-
-//keep "/" page rendering on the bottom, otherwise it'll be read first and render over other pages
-app.get("/", function(req, res){
-    res.send({ express: 'ITS ALIVE!' });
-});
-
 // import classes and mongoDB components
 const org = require('./app/models/organizations');
 
