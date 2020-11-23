@@ -5,7 +5,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const dotenv = require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config()
 
 const app = express();
 const httpServer = http.Server(app);
@@ -15,13 +16,12 @@ const httpServer = http.Server(app);
 // app.set('view engine', 'jsx');
 // app.engine('jsx', require('express-react-views').createEngine());
 
-const hostname = process.env.HOST;
 const DB_name = process.env.DATABASE;
 const PORT = process.env.PORT;
 
 const mongoDB_user = process.env.ATLAS_NAME;
 const mongoDB_pass = process.env.ATLAS_PASS;
-
+console.log(PORT);
 //Display server packets
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src')));
 
 // http server
-const port = process.env.PORT || 8080;
+const port = PORT || 3000;
 const server = httpServer.listen(port, function () {
     console.log(`listening at port: ${port}`);
 });
@@ -54,7 +54,7 @@ const pat = require('./app/models/patient');
 // const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
 
 //Connected server to MongoDB Atlas
-const connectionString =  "mongodb://aliu:pass@ehr-test-shard-00-00.d1mre.mongodb.net:27017,ehr-test-shard-00-01.d1mre.mongodb.net:27017,ehr-test-shard-00-02.d1mre.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-c40bxx-shard-0&authSource=admin&retryWrites=true&w=majority";
+const connectionString =  `mongodb://${mongoDB_user}:${mongoDB_pass}@ehr-test-shard-00-00.d1mre.mongodb.net:27017,ehr-test-shard-00-01.d1mre.mongodb.net:27017,ehr-test-shard-00-02.d1mre.mongodb.net:27017/${DB_name}?ssl=true&replicaSet=atlas-c40bxx-shard-0&authSource=admin&retryWrites=true&w=majority`;
 
 const patient = mongoose.model('Patient', pat.schema_patient);
 const organization = mongoose.model('Organization', org.schema_organization);
