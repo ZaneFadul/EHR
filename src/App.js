@@ -36,10 +36,11 @@ state = {
       <div className="App" style={{
         background: `linear-gradient(${colorTheme['background-top-gradient']},${colorTheme['background-bottom-gradient']})`,
         color:`${colorTheme['main-text']}`
-      }}>
-        <Header role='patient'/>
-        <p className="App-intro">{this.state.data}</p>
-        </div>
+        }}>
+        <Switch>
+          <Header role='patient'/>
+        </Switch>
+        </div>  
       </Router>
     );
   }
