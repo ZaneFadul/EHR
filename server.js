@@ -5,6 +5,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const dotenv = require("dotenv");
+dotenv.config()
 
 const app = express();
 const httpServer = http.Server(app);
@@ -14,6 +16,12 @@ const httpServer = http.Server(app);
 // app.set('view engine', 'jsx');
 // app.engine('jsx', require('express-react-views').createEngine());
 
+const DB_name = process.env.DATABASE;
+const PORT = process.env.PORT;
+
+const mongoDB_user = process.env.ATLAS_NAME;
+const mongoDB_pass = process.env.ATLAS_PASS;
+console.log(PORT);
 //Display server packets
 app.use(logger('dev'));
 app.use(express.json());
@@ -24,77 +32,102 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src')));
 
 // http server
-const port = process.env.PORT || 8080;
+const port = PORT || 3000;
 const server = httpServer.listen(port, function () {
     console.log(`listening at port: ${port}`);
 });
-
-// //test DB schema put in input module in future
-// const testSchema = new mongoose.Schema({
-//     username: {
-//       type: String,
-//       required: [true, 'Username is required']
-//     },
-//     created: {
-//       type: Date,
-//       required: [true, 'Created date is required']
-//     }
-//   })
-  
-
-// //Connected server to MongoDB Atlas
-// const connectionString =  "mongodb+srv://aliu:pass@ehr-test.d1mre.mongodb.net/EHR-TEST?retryWrites=true&w=majority";
-// const User = mongoose.model('user', testSchema, 'user');
-
-// mongoose.set('useNewUrlParser', true);
-// mongoose.set('useFindAndModify', false);
-// mongoose.set('useCreateIndex', true);
-// mongoose.set('useUnifiedTopology', true);
-// //test database insert/find user node ./index.js --user=bob
-// async function createUser(username) {
-//     return new User({
-//       username,
-//       created: Date.now()
-//     }).save()
-//   }
-  
-//   async function findUser(username) {
-//     return await User.findOne({ username })
-//   }
-  
-//   ;(async () => {
-//     const connector = mongoose.connect(connectionString)
-//     const username = process.argv[2].split('=')[1]
-  
-//     let user = await connector.then(async () => {
-//       return findUser(username)
-//     })
-  
-//     if (!user) {
-//       user = await createUser(username)
-//     }
-  
-//     console.log(user)
-//     process.exit(0)
-//   })()
-
-
 
 //rendering pages
 app.get("/test", function(req, res){
     res.send({ express: 'ITS ALIVE!' });
 });
 
+
+
 // import classes and mongoDB components
 const org = require('./app/models/organizations');
 
-const splice = new org.orgs(0,'SPLICE', 'Club', 'test');
-console.log("TEST", splice.data);
+// const splice = new org.orgs(0,'SPLICE', 'Club', 'test');
 
 const pat = require('./app/models/patient');
 
-const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
-console.log("TEST", splice.all);
+// const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
+
+//Connected server to MongoDB Atlas
+const connectionString =  `mongodb://${mongoDB_user}:${mongoDB_pass}@ehr-test-shard-00-00.d1mre.mongodb.net:27017,ehr-test-shard-00-01.d1mre.mongodb.net:27017,ehr-test-shard-00-02.d1mre.mongodb.net:27017/${DB_name}?ssl=true&replicaSet=atlas-c40bxx-shard-0&authSource=admin&retryWrites=true&w=majority`;
+
+const patient = mongoose.model('Patient', pat.schema_patient);
+const organization = mongoose.model('Organization', org.schema_organization);
+
+async function createPatient(){ 
+    return new patient({
+        name: '00',
+        birth_date: new Date(),
+        gender: "Male",
+        address: "address",
+        allergies: ["peanut", "bananer"],
+        disabilities: ["N/A"],
+        health_records: ["TEST"],
+        visitation_records: ["TEST"],
+        payment_records: ["TEST"],
+        appointments: ["TEST"],
+        healthcare_plans: ["TEST"]
+    }).save()
+}
+
+async function createOrganization(){
+    return new organization({
+        name: "SPLICE",
+        type: "Club",
+        info: "TEst"
+    }).save()
+};
+
+;(async () =>{
+    
+    const connector = mongoose.connect(connectionString,{
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+    });
+
+    //test queries
+    let user = await connector.then(async() => {
+        return patient.findOne({name: "00"}, "name allergies");
+    });
+
+    let org = await connector.then(async() => {
+        return organization.findOne({name: "SPLICE"}, "name type");
+    });
+
+    if (!user){
+        console.log("user created")
+        user = await createPatient();
+    }
+    else{
+        console.log("user already exists");
+    }
+
+    if (!org){
+        console.log("org created")
+        org = await createOrganization();
+    }
+    else{
+        console.log("org already exists");
+    }
+
+    console.log(`NEW USER: ${user}`);
+    console.log(`NEW ORG: ${org}`);
+})();
+
+patient.find(function(err, Patient){
+    if (err) return console.error(err);
+    console.log(Patient);
+})
+
+
+
 
 
 // catch 404 and forward to error handler
