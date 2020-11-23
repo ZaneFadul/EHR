@@ -25,7 +25,7 @@ const schema_organization = new mongoose.Schema({
     type: {
         type: String,
         required: [true, "organization type is required"]
-    }
+    },
     info: {
         type: String,
         required: [true, "organization info is required"]

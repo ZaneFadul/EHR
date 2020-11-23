@@ -88,7 +88,7 @@ async function createOrganization(){
     });
 
     let org = await connector.then(async() => {
-        return patient.findOne({name: "SPLICE"}, "name type");
+        return organization.findOne({name: "SPLICE"}, "name type");
     });
 
     if (!user){
@@ -104,7 +104,7 @@ async function createOrganization(){
         org = await createOrganization();
     }
     else{
-        console.log("user already exists");
+        console.log("org already exists");
     }
 
     console.log(`NEW USER: ${user}`);
