@@ -53,11 +53,26 @@ const pat = require('./app/models/patient');
 
 // const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
 
+const user = require('./app/models/user');
+
 //Connected server to MongoDB Atlas
 const connectionString =  `mongodb://${mongoDB_user}:${mongoDB_pass}@ehr-test-shard-00-00.d1mre.mongodb.net:27017,ehr-test-shard-00-01.d1mre.mongodb.net:27017,ehr-test-shard-00-02.d1mre.mongodb.net:27017/${DB_name}?ssl=true&replicaSet=atlas-c40bxx-shard-0&authSource=admin&retryWrites=true&w=majority`;
 
 const patient = mongoose.model('Patient', pat.schema_patient);
 const organization = mongoose.model('Organization', org.schema_organization);
+const ehr_user = mongoose.model('User', user.schema_user);
+
+async function createUser(){
+    return new ehr_user({
+        type: "patient",
+        first_name: "TEST",
+        last_name: NULL,
+        username: "notliu",
+        password: "pass",
+        email: "email@meial",
+        userID: "00"
+    }).save()
+};
 
 async function createPatient(){ 
     return new patient({
@@ -93,23 +108,27 @@ async function createOrganization(){
     });
 
     //test queries
-    let user = await connector.then(async() => {
+    let patient_query = await connector.then(async() => {
         return patient.findOne({name: "00"}, "name allergies");
     });
 
-    let org = await connector.then(async() => {
+    let org_query = await connector.then(async() => {
         return organization.findOne({name: "SPLICE"}, "name type");
     });
 
-    if (!user){
-        console.log("user created")
+    let user_query = await connector.then(async() => {
+        return organization.findOne({name: "SPLICE"}, "name type");
+    });
+
+    if (!patient_query){
+        console.log("patient created")
         user = await createPatient();
     }
     else{
-        console.log("user already exists");
+        console.log("patient already exists");
     }
 
-    if (!org){
+    if (!org_query){
         console.log("org created")
         org = await createOrganization();
     }
@@ -117,8 +136,17 @@ async function createOrganization(){
         console.log("org already exists");
     }
 
-    console.log(`NEW USER: ${user}`);
-    console.log(`NEW ORG: ${org}`);
+    if (!user_query){
+        console.log("user created")
+        org = await createUser();
+    }
+    else{
+        console.log("user already exists");
+    }
+
+    console.log(`NEW PATIENT: ${patient_query}`);
+    console.log(`NEW ORG: ${org_query}`);
+    console.log(`NEW USER: ${user_query}`);
 })();
 
 patient.find(function(err, Patient){

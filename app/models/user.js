@@ -50,7 +50,7 @@ const schema_user = new mongoose.Schema({
     last_name: {
         type: String,
         required: [false]
-    }
+    },
     username: {
         type: String,
         required: [true, "Username required"]
@@ -58,11 +58,11 @@ const schema_user = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "Password required"]
-    }
+    },
     email: {
         type: String,
         required: [true, "E-mail required"]
-    }
+    },
     userID: {
         type: String,
         required: [true, "UserID required"]
