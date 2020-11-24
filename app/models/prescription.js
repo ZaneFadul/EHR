@@ -1,59 +1,19 @@
 // Define JS class and MongoDB components for Patients
-
+const mongoose = require("mongoose");
 // Define Patients JS class
 
 class Prescription{
-    constructor(id, birth_date, gender, address, allergies, disabilities, health_records, visitation_records, payment_records, appointments, healthcare_plans){
-        this.id = id;
-        this.birth_date = birth_date;
-        this.gender = gender;
-        this.address = address;
-        this.allergies = allergies;
-        this.disabilities = disabilities;
-        this.health_records = health_records;
-        this.visitation_records = visitation_records;
-        this.payment_records = payment_records;
-        this.appointments = appointments;
-        this.healthcare_plans = healthcare_plans;
+    constructor(medications, date, description, start_date, end_date){
+        this.medications = medications,
+        this.date = date,
+        this.description = description,
+        this.start_date = start_date,
+        this.end_date = end_date
     }
     get all(){
-        return [this.id, this.birth_date, this.gender, this.address, this.allergies, this.disabilities, this.health_records, this.visitation_records, this.payment_records, this. appointments, this.healthcare_plans];
+        return [this.medications, this.date, this.description, this.start_date, this.end_date];
     }
-    get get_birth_date(){
-        return this.birth_date;
-    }
-    get get_gender(){
-        return this.gender;
-    }
-    get get_id(){
-        return this.id;
-    }
-    get get_address(){
-        return this.address;
-    }
-    get get_allergies(){
-        return this.allergies;
-    }
-    get get_disabilities(){
-        return this.disabilities;
-    }
-    get get_health_records(){
-        return this.health_records
-    }
-    get get_visitation_records(){
-        return this.visitation_records;
-    }
-    get get_payment_records(){
-        return this.payment_records;
-    }
-    get get_appointments(){
-        return this.appointments;
-    }
-    get get_healthcare_plans(){
-        return this.healthcare_plans;
-    }
-
-}
+};
 
 // Define Patients MongoDB component
 
