@@ -63,7 +63,7 @@ const organization = mongoose.model('Organization', org.schema_organization);
 const prescription = mongoose.model('Prescription', presc.schema_prescription);
 const medication = mongoose.model("Medication", med.schema_medication);
 
-const test_med = new med.Medication("name", "desc", "dosage", ["side effects"]);
+const test_med = new med.medication("name", "desc", "dosage", ["side effects"]);
 
 async function createPatient(){ 
     return new patient({
@@ -95,7 +95,7 @@ async function createPrescription(){
         date: new Date(),
         description: "TEST MED PRESCRIPTION",
         start_date: new Date(),
-        end_date: new Date();
+        end_date: new Date()
     }).save()
 };
 
