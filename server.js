@@ -51,6 +51,7 @@ const org = require('./app/models/organizations');
 
 const pat = require('./app/models/patient');
 const presc = require('./app/models/prescription');
+const med = require('./app/models/medication');
 
 // const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
 
@@ -60,7 +61,9 @@ const connectionString =  `mongodb://${mongoDB_user}:${mongoDB_pass}@ehr-test-sh
 const patient = mongoose.model('Patient', pat.schema_patient);
 const organization = mongoose.model('Organization', org.schema_organization);
 const prescription = mongoose.model('Prescription', presc.schema_prescription);
+const medication = mongoose.model("Medication", med.schema_medication);
 
+const test_med = new med.Medication("name", "desc", "dosage", ["side effects"]);
 
 async function createPatient(){ 
     return new patient({
@@ -88,7 +91,7 @@ async function createOrganization(){
 
 async function createPrescription(){
     return new prescription({
-        medications: test_med,
+        medications: [test_med],
         date: new Date(),
         description: "TEST MED PRESCRIPTION",
         start_date: new Date(),

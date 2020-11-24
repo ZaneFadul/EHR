@@ -18,7 +18,7 @@ class Prescription{
 // Define Prescription MongoDB component
 const schema_prescription = new mongoose.Schema({
     medications: {
-        type: class,
+        type: Array,
         required: [true, "medications required"]
     },
     date: {
@@ -32,12 +32,16 @@ const schema_prescription = new mongoose.Schema({
     start_date: {
         type: Date,
         required: [true, "start date is required"]
-    }
+    },
     end_date: {
         type: Date,
         required: [true, "end date is required"]
     }
 })
+
+//loads class methods into schema to be used in mongodb document instances
+schema_prescription.loadClass(Prescription);
+
 // export module
 module.exports.prescription = Prescription;
 module.exports.schema_prescription = schema_prescription;
