@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 //mongoDB documents
 const doc = require("./documents");
 
-function createRecord(model, create_func, p_array){
+async function createRecord(model, create_func, p_array){
     //find if record exists with same name
     // let query = await connector.then(async()=>{
     //     return model.findOne({_id:id})
@@ -21,3 +21,5 @@ function createRecord(model, create_func, p_array){
 
     console.log(`NEW DOCUMENT : ${result}`);
 }
+
+module.exports.createRecord = createRecord;

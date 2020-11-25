@@ -2,10 +2,11 @@
 const mongoose = require("mongoose");
 
 //mongoDB schemas
-const org = require('./app/models/organizations');
-const pat = require('./app/models/patient');
-const presc = require('./app/models/prescription');
-const med = require('./app/models/medication');
+const org = require('../models/organizations');
+const pat = require('../models/patient');
+const presc = require('../models/prescription');
+const med = require('../models/medication');
+const user = require('../models/user');
 
 const patient = mongoose.model('Patient', pat.schema_patient);
 const organization = mongoose.model('Organization', org.schema_organization);
