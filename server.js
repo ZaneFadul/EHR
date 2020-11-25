@@ -31,20 +31,13 @@ app.use(cookieParser());
 //directory to serve static REACT files
 app.use(express.static(path.join(__dirname, 'src')));
 
+console.log("poopie");
 // http server
 const port = PORT || 3000;
 const server = httpServer.listen(port, function () {
     console.log(`listening at port: ${port}`);
 });
 
-<<<<<<< HEAD
-//rendering pages
-app.get("/test", function(req, res){
-    res.send({ express: 'ITS ALIVE!' });
-});
-
-
-=======
 // //test DB schema put in input module in future
 // const testSchema = new mongoose.Schema({
 //     username: {
@@ -93,7 +86,6 @@ app.get("/test", function(req, res){
 //     console.log(user)
 //     process.exit(0)
 //   })()
->>>>>>> 7e9901aa1269979a0fc683d0a58bc5d0a247aa07
 
 // import classes and mongoDB components
 const org = require('./app/models/organizations');
@@ -208,11 +200,8 @@ patient.find(function(err, Patient){
 
 
 
-<<<<<<< HEAD
-=======
 //const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
 //console.log("TEST", splice.all);
->>>>>>> 7e9901aa1269979a0fc683d0a58bc5d0a247aa07
 
 
 // catch 404 and forward to error handler
