@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Bahnschrift';
+  src: url('./Fonts/Bahnschrift.eot');
+  src: url('./Fonts/Bahnschrift.eot?#iefix') format('embedded-opentype'),
+      url('./Fonts/Bahnschrift.woff2') format('woff2'),
+      url('./Fonts/Bahnschrift.woff') format('woff'),
+      url('./Fonts/Bahnschrift.svg#Bahnschrift') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .App {
   text-align: center;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  font-family: 'Bahnschrift';
 }

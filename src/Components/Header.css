@@ -1,0 +1,9 @@
+.Header {
+  display: block;
+  width: 100%;
+  height: calc(33% * 2);
+  min-height: 5em;
+  border-top: solid;
+  border-bottom: solid;
+  border-width: thick;
+}

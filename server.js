@@ -37,12 +37,63 @@ const server = httpServer.listen(port, function () {
     console.log(`listening at port: ${port}`);
 });
 
+<<<<<<< HEAD
 //rendering pages
 app.get("/test", function(req, res){
     res.send({ express: 'ITS ALIVE!' });
 });
 
 
+=======
+// //test DB schema put in input module in future
+// const testSchema = new mongoose.Schema({
+//     username: {
+//       type: String,
+//       required: [true, 'Username is required']
+//     },
+//     created: {
+//       type: Date,
+//       required: [true, 'Created date is required']
+//     }
+//   })
+  
+
+// //Connected server to MongoDB Atlas
+// const connectionString =  "mongodb+srv://aliu:pass@ehr-test.d1mre.mongodb.net/EHR-TEST?retryWrites=true&w=majority";
+// const User = mongoose.model('user', testSchema, 'user');
+
+// mongoose.set('useNewUrlParser', true);
+// mongoose.set('useFindAndModify', false);
+// mongoose.set('useCreateIndex', true);
+// mongoose.set('useUnifiedTopology', true);
+// //test database insert/find user node ./index.js --user=bob
+// async function createUser(username) {
+//     return new User({
+//       username,
+//       created: Date.now()
+//     }).save()
+//   }
+  
+//   async function findUser(username) {
+//     return await User.findOne({ username })
+//   }
+  
+//   ;(async () => {
+//     const connector = mongoose.connect(connectionString)
+//     const username = process.argv[2].split('=')[1]
+  
+//     let user = await connector.then(async () => {
+//       return findUser(username)
+//     })
+  
+//     if (!user) {
+//       user = await createUser(username)
+//     }
+  
+//     console.log(user)
+//     process.exit(0)
+//   })()
+>>>>>>> 7e9901aa1269979a0fc683d0a58bc5d0a247aa07
 
 // import classes and mongoDB components
 const org = require('./app/models/organizations');
@@ -157,6 +208,11 @@ patient.find(function(err, Patient){
 
 
 
+<<<<<<< HEAD
+=======
+//const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
+//console.log("TEST", splice.all);
+>>>>>>> 7e9901aa1269979a0fc683d0a58bc5d0a247aa07
 
 
 // catch 404 and forward to error handler

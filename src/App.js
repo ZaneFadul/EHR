@@ -1,13 +1,32 @@
 
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import theme from './Constants/theme';
 import './App.css';
 
-class App extends Component {
-state = {
-    data: null
-  };
+//Import Pages
+import About from './Pages/About';
+import Dashboard from './Pages/Dashboard';
+import Login from './Pages/Login';
+import PageNotFound from './Pages/PageNotFound';
 
+let mode = 'lightMode';
+let colorTheme = theme.mainColors[mode];
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null,
+      loggedIn: false
+    };
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin() {
+    console.log("Logged in.");
+    this.setState({ loggedIn: true });
+  }
   componentDidMount() {
       // Call our fetch function below once the component mounts
     this.callBackendAPI()
@@ -27,14 +46,29 @@ state = {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        {/* Render the newly fetched data inside of this.state.data  */}
-        <p className="App-intro">{this.state.data}</p>
-      </div>
+      <Router>
+      <div className="App" style={{
+        background: `linear-gradient(${colorTheme['background-top-gradient']},${colorTheme['background-bottom-gradient']})`,
+        color:`${colorTheme['main-text']}`
+        }}>
+        <Switch>
+            <Route exact path="/">
+              {this.state.loggedIn ? <Redirect to="/dashboard" /> : <About />}
+            </Route>
+            <Route path="/dashboard">
+              {this.state.loggedIn ? <Dashboard/> : <Redirect to="/login"/>}
+              </Route>
+            <Route path="/login">
+              {this.state.loggedIn ? <Redirect to="/dashboard" />:
+                <Login handleLogin={() => {
+                  this.handleLogin();
+                  <Redirect to="/dashboard" />
+                }} />}
+              </Route>
+            <Route path="*" component={PageNotFound} />
+        </Switch>
+        </div>  
+      </Router>
     );
   }
 }
