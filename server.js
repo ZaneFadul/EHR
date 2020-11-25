@@ -31,7 +31,6 @@ app.use(cookieParser());
 //directory to serve static REACT files
 app.use(express.static(path.join(__dirname, 'src')));
 
-console.log("poopie");
 // http server
 const port = PORT || 3000;
 const server = httpServer.listen(port, function () {
