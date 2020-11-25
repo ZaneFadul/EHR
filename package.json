@@ -43,7 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "jest-cli": "^26.6.3"
-  }
+  "devDependencies": {}
 }
