@@ -14,27 +14,6 @@ class user{
     get all(){
         return [self.type, self.first_name, self.last_name, self.user_name, self.password, self.e_mail, self.userID];
     }
-    get usertype(){
-        return self.type;
-    }
-    get firstname(){
-        return self.first_name;
-    }
-    get lastname(){
-        return self.last_name;
-    }
-    get username(){
-        return self.user_name;
-    }
-    get pass(){
-        return self.password;
-    }
-    get email(){
-        return self.e_mail;
-    }
-    get ID(){
-        return self.userID;
-    }
 };
 
 //Define MongoDB schema
