@@ -48,6 +48,8 @@ const connectionString =  `mongodb://${mongoDB_user}:${mongoDB_pass}@ehr-test-sh
 
 //import documents
 const doc = require("./app/controllers/documents");
+//import queries
+const que = require("./app/controllers/queries");
 
 ;(async () =>{
     
@@ -59,69 +61,9 @@ const doc = require("./app/controllers/documents");
     });
 
     //test queries
-    let patient_query = await connector.then(async() => {
-        return patient.findOne({name: "00"}, "name allergies");
-    });
-
-    let org_query = await connector.then(async() => {
-        return organization.findOne({name: "SPLICE"}, "name type");
-    });
-
-
-    let user_query = await connector.then(async() => {
-        return organization.findOne({name: "SPLICE"}, "name type");
-    });
-
-    let prescription_query = await connector.then(async() => {
-        return prescription.findOne({name: "SPLICE"}, "name type");
-    });
-
-    if (!patient_query){
-        console.log("patient created")
-        user = await createPatient();
-    }
-    else{
-        console.log("patient already exists");
-    }
-
-    if (!org_query){
-        console.log("org created")
-        org = await createOrganization();
-    }
-    else{
-        console.log("org already exists");
-    }
-
-    if (!user_query){
-        console.log("user created")
-        org = await createUser();
-    }
-    else{
-        console.log("user already exists");
-    }
-
-    if (!prescription_query){
-        console.log("prescription created")
-        prescription_query = await createPrescription();
-    }
-    else{
-        console.log("prescription already exists");
-    }
-
-    console.log(`NEW USER: ${user}`);
-    console.log(`NEW ORG: ${org}`);
-    console.log(`NEW PRESCRIPTION QUERY: ${prescription_query}`);
-
+    patient_arg = ["name",new Date(), "test","test","test","test","test","test","test","test","test"];
+    que.createRecord(doc.patient, doc.createPatient, patient_arg);
 })();
-
-patient.find(function(err, Patient){
-    if (err) return console.error(err);
-    console.log(Patient);
-})
-
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

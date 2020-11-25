@@ -31,7 +31,7 @@ function createUser(type, first_name, last_name, username, password, email, user
 
 //create patient document
 function createPatient(name, birth_date, gender, address, allergies, disabilities, health_records, visitation_records, payment_records, appointments, healthcare_plans) { 
-    return new Patient({
+    return new patient({
         name: name,
         birth_date: birth_date,
         gender: gender,
