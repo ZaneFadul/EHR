@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.2.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
+    "jest-cli": "^26.6.3",
     "mongoose": "^5.10.13",
     "morgan": "^1.10.0",
     "react": "^17.0.1",
@@ -41,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "verbose": true
   }
 }
