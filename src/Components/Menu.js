@@ -6,7 +6,7 @@ export default class HeaderMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      logoPop: false
+      logoPop: null
     };
     this.toggleLogoPop = this.toggleLogoPop.bind(this);
   }
