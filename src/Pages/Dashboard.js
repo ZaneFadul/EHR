@@ -6,8 +6,8 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Header role="patient" />
-        <Sidebar role="patient" />
+        <Header role="staff" />
+        <Sidebar role="staff" />
       </div>
     );
   }
