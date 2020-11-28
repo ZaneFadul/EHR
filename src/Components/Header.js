@@ -11,15 +11,10 @@ export default function Header(props) {
           src={Logo}
           alt="none"
           className="Header-logo"
-          // style={{
-          //   animationName: `logo-hover-${this.state.logoPop}`,
-          //   animationDuration: "0.3s",
-          //   animationTimingFunction: "ease-out",
-          //   animationFillMode: "both",
-          // }}
+          href="%PUBLIC_URL%/"
         />
         <a href="/login" className="logout">
-          <i class="material-icons right">exit_to_app</i>
+          <i className="material-icons right">exit_to_app</i>
           <span>Logout</span>
         </a>
       </div>
