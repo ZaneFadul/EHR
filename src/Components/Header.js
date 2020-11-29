@@ -1,23 +1,28 @@
-import React, { Component } from 'react';
-import theme from '../Constants/theme';
-import './Header.css';
-import Menu from './Menu';
+import React from "react";
+import theme from "../Constants/theme";
+import Logo from "../Constants/logo_red.svg";
+import "./Header.css";
 
-export default class Header extends Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      logoOn: false
-    };
-  }
-
-  render() {
-    return (
-      <div className="Header" style={{
-        borderColor : `${theme.roleColors[this.props.role]['primary']}`}}>
-          <Menu />
+export default function Header(props) {
+  return (
+    <div>
+      <div className="Header">
+        <img
+          src={Logo}
+          alt="none"
+          className="Header-logo"
+          href="%PUBLIC_URL%/"
+        />
+        <a href="/login" className="logout">
+          <i className="material-icons right">exit_to_app</i>
+          <span>Logout</span>
+        </a>
       </div>
-    );
-  }
+      <hr
+        style={{
+          borderColor: `${theme.roleColors[props.role]["primary"]}`,
+        }}
+      ></hr>
+    </div>
+  );
 }
-
