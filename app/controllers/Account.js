@@ -1,5 +1,5 @@
-//implement Login Query Function
+const mongoose = require('mongoose');
 
-
-//implement Registration Query Function
+const user = require('../models/user');
+const doc = require('./documents');
 
