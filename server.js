@@ -37,6 +37,7 @@ const server = httpServer.listen(port, function () {
     console.log(`listening at port: ${port}`);
 });
 
+<<<<<<< HEAD
 // //test DB schema put in input module in future
 // const testSchema = new mongoose.Schema({
 //     username: {
@@ -96,102 +97,39 @@ const presc = require('./app/models/prescription');
 const med = require('./app/models/medication');
 
 // const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
+=======
+//rendering pages
+app.get("/test", function(req, res){
+    res.send({ express: 'ITS ALIVE!' });
+});
+
+>>>>>>> 5fc18ceb70fc654c28d047bbfb3da2347106842b
 
 //Connected server to MongoDB Atlas
 const connectionString =  `mongodb://${mongoDB_user}:${mongoDB_pass}@ehr-test-shard-00-00.d1mre.mongodb.net:27017,ehr-test-shard-00-01.d1mre.mongodb.net:27017,ehr-test-shard-00-02.d1mre.mongodb.net:27017/${DB_name}?ssl=true&replicaSet=atlas-c40bxx-shard-0&authSource=admin&retryWrites=true&w=majority`;
 
-const patient = mongoose.model('Patient', pat.schema_patient);
-const organization = mongoose.model('Organization', org.schema_organization);
-const prescription = mongoose.model('Prescription', presc.schema_prescription);
-const medication = mongoose.model("Medication", med.schema_medication);
-
-const test_med = new med.medication("name", "desc", "dosage", ["side effects"]);
-
-async function createPatient(){ 
-    return new patient({
-        name: '00',
-        birth_date: new Date(),
-        gender: "Male",
-        address: "address",
-        allergies: ["peanut", "bananer"],
-        disabilities: ["N/A"],
-        health_records: ["TEST"],
-        visitation_records: ["TEST"],
-        payment_records: ["TEST"],
-        appointments: ["TEST"],
-        healthcare_plans: ["TEST"]
-    }).save()
-}
-
-async function createOrganization(){
-    return new organization({
-        name: "SPLICE",
-        type: "Club",
-        info: "TEst"
-    }).save()
-};
-
-async function createPrescription(){
-    return new prescription({
-        medications: [test_med],
-        date: new Date(),
-        description: "TEST MED PRESCRIPTION",
-        start_date: new Date(),
-        end_date: new Date()
-    }).save()
-};
+//import documents
+const doc = require("./app/controllers/documents");
+//import queries
+const que = require("./app/controllers/queries");
 
 ;(async () =>{
     
-    const connector = mongoose.connect(connectionString,{
+    const connector = await mongoose.connect(connectionString,{
         useNewUrlParser: true,
-        useUnifiedTopology: true,
+        useUnifiedTopology: true, 
         useFindAndModify: false,
         useCreateIndex: true
     });
 
     //test queries
-    let user = await connector.then(async() => {
-        return patient.findOne({name: "00"}, "name allergies");
-    });
+    // patient_arg = ["name",new Date(), "test","test","test","test","test","test","test","test","test"];
+    // que.createRecord(doc.ehr_user, doc.createUser, ["t","t","t","t","p","e","u"]);
 
-    let org = await connector.then(async() => {
-        return organization.findOne({name: "SPLICE"}, "name type");
-    });
-
-    let prescription_query = await connector.then(async() => {
-        return prescription.findOne({name: "SPLICE"}, "name type");
-    });
-
-    if (!user){
-        console.log("user created")
-        user = await createPatient();
-    }
-    else{
-        console.log("user already exists");
-    }
-
-    if (!org){
-        console.log("org created")
-        org = await createOrganization();
-    }
-    else{
-        console.log("org already exists");
-    }
-
-    if (!prescription_query){
-        console.log("prescription created")
-        prescription_query = await createPrescription();
-    }
-    else{
-        console.log("prescription already exists");
-    }
-
-    console.log(`NEW USER: ${user}`);
-    console.log(`NEW ORG: ${org}`);
-    console.log(`NEW PRESCRIPTION QUERY: ${prescription_query}`);
+    console.log(`${que.register_organization_child("org_Test","org_test","pass","1","SPLICE")}TEST QUERY`);
 })();
 
+<<<<<<< HEAD
 patient.find(function(err, Patient){
     if (err) return console.error(err);
     console.log(Patient);
@@ -203,6 +141,8 @@ patient.find(function(err, Patient){
 //console.log("TEST", splice.all);
 
 
+=======
+>>>>>>> 5fc18ceb70fc654c28d047bbfb3da2347106842b
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
