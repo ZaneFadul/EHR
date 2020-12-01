@@ -8,11 +8,11 @@ const presc = require('../models/prescription');
 const med = require('../models/medication');
 const user = require('../models/user');
 
-const patient = mongoose.model('Patient', pat.schema_patient);
-const organization = mongoose.model('Organization', org.schema_organization);
-const prescription = mongoose.model('Prescription', presc.schema_prescription);
-const medication = mongoose.model("Medication", med.schema_medication);
-const ehr_user = mongoose.model('User', user.schema_user);
+const patient = mongoose.model('patients', pat.schema_patient, 'patients');
+const organization = mongoose.model('organizations', org.schema_organization, "organizations");
+const prescription = mongoose.model('prescriptions', presc.schema_prescription, 'prescriptions');
+const medication = mongoose.model("medications", med.schema_medication, "medications");
+const ehr_user = mongoose.model('users', user.schema_user, 'users');
 
 //set test medication
 // const test_med = new med.medication("name", "desc", "dosage", ["side effects"]);
@@ -72,3 +72,10 @@ module.exports.createOrganization = createOrganization;
 module.exports.createPatient = createPatient;
 module.exports.createPrescription = createPrescription;
 module.exports.createUser = createUser;
+
+//export models
+module.exports.model_patient = patient;
+module.exports.model_organization = organization;
+module.exports.model_prescription = prescription;
+module.exports.model_medication = medication;
+module.exports.model_user = ehr_user;
