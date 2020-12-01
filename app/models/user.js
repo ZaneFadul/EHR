@@ -45,6 +45,14 @@ const schema_user = new mongoose.Schema({
     userID: {
         type: String,
         required: [true, "UserID required"]
+    },
+    parent_org: {
+        type: String,
+        required: false
+    },
+    parent_ID: {
+        type: String,
+        required: false
     }
 });
 

@@ -61,7 +61,8 @@ function login(username, password){
 }
 
 //implement Registration Query Function
-function register(name, email, password){
+function register(name, email, password, ...parent){
+    
     doc.model_user.findOne(
         {username:name},
         function(err, res){
@@ -83,7 +84,12 @@ function register(name, email, password){
                             //find number of documents, increment and format userID
                             ;(async() =>{
                                 await doc.model_user.estimatedDocumentCount({}, function(err, res){
-                                    createRecord(doc.model_user, doc.createUser, ["Patient", "N/A", "N/A", name, password, email, (res+1).toString().padStart(10,"0")]);    
+                                    if(!parent){
+                                        createRecord(doc.model_user, doc.createUser, ["Patient",,, name, password, email, (res+1).toString().padStart(10,"0"),parent[0],parent[1]]);    
+                                    }else{
+                                        createRecord(doc.model_user, doc.createUser, ["Patient",,, name, password, email, (res+1).toString().padStart(10,"0"),,]);    
+                                    }
+                                    
                                 });
                                 //find created document and return userID
                                 doc.model_user.findOne({
@@ -109,7 +115,7 @@ function register(name, email, password){
     });
 }
 
-//implement getUserID Query Function
+
 
 
 module.exports.login = login;
