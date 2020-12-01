@@ -53,7 +53,7 @@ const que = require("./app/controllers/queries");
 
 ;(async () =>{
     
-    const connector = mongoose.connect(connectionString,{
+    const connector = await mongoose.connect(connectionString,{
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
@@ -61,8 +61,9 @@ const que = require("./app/controllers/queries");
     });
 
     //test queries
-    patient_arg = ["name",new Date(), "test","test","test","test","test","test","test","test","test"];
-    que.createRecord(doc.patient, doc.createPatient, patient_arg);
+    // patient_arg = ["name",new Date(), "test","test","test","test","test","test","test","test","test"];
+    // que.createRecord(doc.ehr_user, doc.createUser, ["t","t","t","t","p","e","u"]);
+    console.log(`${que.login("t","p")}TEST QUERY`);
 })();
 
 // catch 404 and forward to error handler
