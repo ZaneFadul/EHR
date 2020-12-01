@@ -7,7 +7,7 @@ export default class Dashboard extends Component {
     return (
       <div>
         <Header role="staff" />
-        <Sidebar role="staff" />
+        <Sidebar role="staff" active="Dashboard" />
       </div>
     );
   }

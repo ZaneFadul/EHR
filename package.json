@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.2.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
+    "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.10.13",
     "morgan": "^1.10.0",
     "react": "^17.0.1",

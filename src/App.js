@@ -14,6 +14,7 @@ import Dashboard from "./Pages/Dashboard";
 import Login from "./Pages/Login";
 import PageNotFound from "./Pages/PageNotFound";
 import Register from "./Pages/Register";
+import Patients from "./Pages/Patients";
 
 let mode = "lightMode";
 let colorTheme = theme.mainColors[mode];
@@ -64,7 +65,8 @@ class App extends Component {
               {this.state.loggedIn ? <Redirect to="/dashboard" /> : <About />}
             </Route>
             <Route path="/dashboard">
-              {this.state.loggedIn ? <Dashboard /> : <Redirect to="/login" />}
+              {/* {this.state.loggedIn ? <Dashboard /> : <Redirect to="/login" />} */}
+              <Dashboard />
             </Route>
             <Route path="/login">
               {this.state.loggedIn ? (
@@ -78,8 +80,11 @@ class App extends Component {
                 />
               )}
             </Route>
-            <Route>
+            <Route path="/register">
               <Register />
+            </Route>
+            <Route path="/patients">
+              <Patients />
             </Route>
             <Route path="*" component={PageNotFound} />
           </Switch>
