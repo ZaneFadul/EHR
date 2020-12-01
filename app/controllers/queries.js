@@ -23,11 +23,10 @@ async function createRecord(model, create_func, p_array){
     console.log(`NEW DOCUMENT : ${result}`);
 }
 
-const ehr_user = mongoose.model('User', user.schema_user);
 //implement Login Query Function
 function login(username, password){
     user_id = -1;
-    ehr_user.findOne({
+    doc.model_user.findOne({
         username:username
     }, function(err,user_q){
         user_id = user_q.userID;
@@ -37,7 +36,7 @@ function login(username, password){
             return -1;
         }else{
         //query password if valid username
-            ehr_user.findOne({
+            doc.model_user.findOne({
                 password:password
             }, function(err, pass_q){
                 //return -1 if error
@@ -61,15 +60,58 @@ function login(username, password){
     });
 }
 
-
-
 //implement Registration Query Function
-
+function register(name, email, password){
+    doc.model_user.findOne(
+        {username:name},
+        function(err, res){
+            if(err){
+                console.error(err);
+                return -1;
+            }
+            if(!res){
+                doc.model_user.findOne(
+                    {email:email},
+                    function(err, mail_q){
+                        if(err){
+                            console.error(err);
+                            return -1;
+                        }
+                        if(!mail_q){
+                            //REGISTRATION SUCCESS
+                            console.log("REGISTRATION SUCCESS");
+                            //find number of documents, increment and format userID
+                            ;(async() =>{
+                                await doc.model_user.estimatedDocumentCount({}, function(err, res){
+                                    createRecord(doc.model_user, doc.createUser, ["Patient", "N/A", "N/A", name, password, email, (res+1).toString().padStart(10,"0")]);    
+                                });
+                                //find created document and return userID
+                                doc.model_user.findOne({
+                                    username:name
+                                }, function(err,id){
+                                    console.log(`${id.userID}: ID registerd`);
+                                    return id.userID;
+                                });
+                            })();
+                        }
+                        else{
+                            console.log("Account with email exists");
+                            //return -3 if account exists with email
+                            return -3;
+                        }
+                });
+            }
+            else{
+                console.log("Account with username exists");
+                //return -2 if username exists, until socketio is implemented
+                return -2;
+            }
+    });
+}
 
 //implement getUserID Query Function
 
 
 module.exports.login = login;
-// module.exports.register = register;
-
+module.exports.register = register;
 module.exports.createRecord = createRecord;
