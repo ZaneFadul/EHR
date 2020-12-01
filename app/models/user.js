@@ -48,13 +48,13 @@ const schema_user = new mongoose.Schema({
     },
     parent_org: {
         type: String,
-        required: false
+        required: [false]
     },
     parent_ID: {
         type: String,
-        required: false
+        required: [false]
     }
-});
+},{strict:false});
 
 module.exports.user = user;
 module.exports.schema_user = schema_user;

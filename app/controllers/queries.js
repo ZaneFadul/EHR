@@ -62,7 +62,8 @@ function login(username, password){
 
 //implement Registration Query Function
 function register(name, email, password, ...parent){
-    
+    //makes array from spread parameters
+    org_array = Array.from(parent)
     doc.model_user.findOne(
         {username:name},
         function(err, res){
@@ -84,8 +85,10 @@ function register(name, email, password, ...parent){
                             //find number of documents, increment and format userID
                             ;(async() =>{
                                 await doc.model_user.estimatedDocumentCount({}, function(err, res){
-                                    if(!parent){
-                                        createRecord(doc.model_user, doc.createUser, ["Patient",,, name, password, email, (res+1).toString().padStart(10,"0"),parent[0],parent[1]]);    
+                                    //check if user is org user or patient
+                                    if(parent != null){
+                                        console.log("TEST")
+                                        createRecord(doc.model_user, doc.createUser, ["Patient",,, name, password, email, (res+1).toString().padStart(10,"0"),org_array[1],org_array[0]]);    
                                     }else{
                                         createRecord(doc.model_user, doc.createUser, ["Patient",,, name, password, email, (res+1).toString().padStart(10,"0"),,]);    
                                     }
@@ -115,9 +118,17 @@ function register(name, email, password, ...parent){
     });
 }
 
+function register_patient(user, mail, pass){
+    register(user, mail, pass);
+}
 
+function register_organization_child(user, mail, pass, org_id, org_name){
+    register(user, mail, pass, org_id, org_name);
+}
 
 
 module.exports.login = login;
 module.exports.register = register;
 module.exports.createRecord = createRecord;
+module.exports.register_patient = register_patient;
+module.exports.register_organization_child = register_organization_child;
