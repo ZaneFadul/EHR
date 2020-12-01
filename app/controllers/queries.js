@@ -6,7 +6,9 @@ const user = require('../models/user');
 const doc = require("./documents");
 
 function getNumCollection(model){
-    return await model.estimatedDocumentCount();
+    model.estimatedDocumentCount({}, function(err, res){
+        return res;
+    });
 }
 
 async function createRecord(model, create_func, p_array){
