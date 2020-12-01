@@ -5,6 +5,10 @@ const mongoose = require("mongoose");
 const user = require('../models/user');
 const doc = require("./documents");
 
+function getNumCollection(model){
+    return await model.estimatedDocumentCount();
+}
+
 async function createRecord(model, create_func, p_array){
     //find if record exists with same name
     // let query = await connector.then(async()=>{
@@ -61,15 +65,49 @@ function login(username, password){
     });
 }
 
-
-
 //implement Registration Query Function
-
+function register(name, email, password){
+    ehr_user.findOne(
+        {username:name},
+        function(err, res){
+            if(err){
+                console.error(err);
+                return -1;
+            }
+            if(!res){
+                ehr_user.findOne(
+                    {email:email},
+                    function(err, mail_q){
+                        if(err){
+                            console.error(err);
+                            return -1;
+                        }
+                        if(!mail_q){
+                            //REGISTRATION SUCCESS
+                            console.log("REGISTRATION SUCCESS");
+                            user_id = (getNumCollection(ehr_user)+1).toString().padStart(10,"0");
+                            createRecord(ehr_user, doc.createUser, ["Patient", "N/A", "N/A", name, password, email, user_id]);
+                            return user_id;
+                        }
+                        else{
+                            console.log("Account with email exists");
+                            //return -3 if account exists with email
+                            return -3;
+                        }
+                });
+            }
+            else{
+                console.log("Account with username exists");
+                //return -2 if username exists, until socketio is implemented
+                return -2;
+            }
+    });
+}
 
 //implement getUserID Query Function
 
 
 module.exports.login = login;
-// module.exports.register = register;
-
+module.exports.register = register;
+module.exports.getNumCollection = getNumCollection;
 module.exports.createRecord = createRecord;
