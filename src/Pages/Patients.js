@@ -4,7 +4,7 @@ import Sidebar from "../Components/Sidebar";
 import PatientCard from "../Components/PatientCard";
 import AddPatientModal from "../Components/AddPatientModal";
 import theme from "../Constants/theme";
-import "./Patients.css";
+import "./PageContainer.css";
 
 const patientInfo = [];
 
@@ -25,7 +25,7 @@ export default function Patients(props) {
     <div>
       <Header role="staff" />
       <Sidebar role="staff" active="Patients" />
-      <div className="container">
+      <div className="page-container">
         <div className="title-container">
           <h4>My Patients</h4>
           <a

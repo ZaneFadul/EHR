@@ -3,6 +3,7 @@ import Header from "../Components/Header";
 import Sidebar from "../Components/Sidebar";
 import AppointmentCard from "../Components/AppointmentCard";
 import AddAppointmentModal from "../Components/AddAppointmentModal";
+import "./PageContainer.css";
 import theme from "../Constants/theme";
 
 const availableTime = [
@@ -86,7 +87,7 @@ export default function Appointments(props) {
     <div>
       <Header role="staff" />
       <Sidebar role="staff" active="Appointments" />
-      <div className="container">
+      <div className="page-container">
         <div className="title-container">
           <h4>My Appointments</h4>
           <a

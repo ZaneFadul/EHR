@@ -7,12 +7,9 @@ export default function Header(props) {
   return (
     <div>
       <div className="Header">
-        <img
-          src={Logo}
-          alt="none"
-          className="Header-logo"
-          href="%PUBLIC_URL%/"
-        />
+        <a href="/dashboard">
+          <img src={Logo} alt="none" className="Header-logo" />
+        </a>
         <a href="/login" className="logout">
           <i className="material-icons right">exit_to_app</i>
           <span>Logout</span>
