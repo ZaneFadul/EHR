@@ -15,6 +15,7 @@ import Login from "./Pages/Login";
 import PageNotFound from "./Pages/PageNotFound";
 import Register from "./Pages/Register";
 import Patients from "./Pages/Patients";
+import Appointments from "./Pages/Appointments";
 
 let mode = "lightMode";
 let colorTheme = theme.mainColors[mode];
@@ -85,6 +86,9 @@ class App extends Component {
             </Route>
             <Route path="/patients">
               <Patients />
+            </Route>
+            <Route path="/appointments">
+              <Appointments />
             </Route>
             <Route path="*" component={PageNotFound} />
           </Switch>
