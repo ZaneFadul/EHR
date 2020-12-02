@@ -11,7 +11,6 @@ const role_sidebarinfo = {
     'Patients',
     'Appointments',
     'Messages',
-    'Drugs',
     'Settings'
   ],
   'insurance': [
@@ -20,4 +19,19 @@ const role_sidebarinfo = {
   ]
 };
 
-export default role_sidebarinfo;
+const sidebar_to_comp = {
+  'My Re-medi Health Record': 'RemediRecord',
+  'Appointments': 'Appointments',
+  'Prescriptions': 'Prescriptions',
+  'Medical Records': 'Records',
+  'My Insurance Plan': 'InsurancePlan',
+  'Settings': 'Settings',
+  'Patients': 'Patients',
+  'Messages': 'Messages',
+  'Clients': 'Clients'
+};
+
+module.exports = {
+  role_sidebarinfo,
+  sidebar_to_comp
+};

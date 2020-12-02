@@ -1,6 +1,6 @@
-import React from "react";
+import React, {Component} from "react";
 import theme from "../Constants/theme";
-import role_sidebars from '../Constants/role_sidebars';
+import { role_sidebarinfo } from '../Constants/role_sidebars';
 
 
 const container_style = {
@@ -11,12 +11,16 @@ const container_style = {
   backgroundColor: 'black'
 };
 
-export default function Sidebar(props) {
-  const sidebarInfo = role_sidebars[props.role];
+export default class Sidebar extends Component {
+  render() {
+    
+  const sidebarInfo = role_sidebarinfo[this.props.role];
 
   return (
     <div style={{
-      height: '100%'
+      position: 'absolute',
+      width: '100%',
+      height: '50%'
     }}>
       <ul className="card collection" style={container_style}>
         <li className="collection-item"></li>
@@ -25,9 +29,9 @@ export default function Sidebar(props) {
             href="/dashboard"
             className="collection-item"
             style={{
-              height: '100%',
+              height: '10%',
               color: "white",
-              backgroundColor: `${theme.roleColors[props.role]["primary"]}`,
+              backgroundColor: `${theme.roleColors[this.props.role]["primary"]}`,
             }}
           >
             Dashboard
@@ -35,24 +39,21 @@ export default function Sidebar(props) {
         </li>
         {sidebarInfo.map((item, index) => {
           return (
-            <li key={index}>
-              <a
-                href="/patient"
-                className="collection-item"
-                style={{
-                  height:'100%',
-                  color: `${theme.roleColors[props.role]["primary"]}`,
-                  borderColor: `${theme.roleColors[props.role]["primary"]}`,
-                }}
-              >
+            <li key={index} className="collection-item" 
+            style={{
+              height:'10%',
+              color: `${theme.roleColors[this.props.role]["primary"]}`,
+              borderColor: `${theme.roleColors[this.props.role]["primary"]}`,
+              }}
+              onClick={() => this.props.onClick(item)}>
                 {item}
-              </a>
             </li>
           );
         })}
-        <li className="collection-item" style={{ height: '50rem' }}></li>
-        <li className="collection-item">Role: {props['role'].charAt(0).toUpperCase() + props['role'].slice(1)}</li>
+        <li className="collection-item" style={{ height: '100%' }}></li>
+        <li className="collection-item">Role: {this.props['role'].charAt(0).toUpperCase() + this.props['role'].slice(1)}</li>
       </ul>
     </div>
   );
+  };
 }
