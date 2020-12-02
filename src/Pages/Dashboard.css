@@ -1,0 +1,18 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.dash-content{
+    min-height: 100px;
+    flex: 1;
+}
+
+.dash-page{
+  width:55%;
+  margin: auto;
+  background-color: black;
+  color: beige;
+}
