@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 
 
-// Define Patients MongoDB component
+// Define Staff MongoDB component
 
 const schema_staff = new mongoose.Schema({
     name: {   
