@@ -24,35 +24,35 @@ async function createRecord(model, create_func, p_array){
 }
 
 //implement Login Query Function
-function login(username, password){
+async function login(email, password, res){
     user_id = -1;
-    doc.model_user.findOne({
-        username:username
+    await doc.model_user.findOne({
+        email:email
     }, function(err,user_q){
-        user_id = user_q.userID;
         //return -1 if error
-        if(err){
-            console.error(err);
-            return -1;
+        if(err || user_q == null){  
+            console.log("EMAIL NOT FOUND");
+            res.send(null);
         }else{
-        //query password if valid username
+            user_id = user_q.userID;
+            //query password if valid username
             doc.model_user.findOne({
                 password:password
             }, function(err, pass_q){
                 //return -1 if error
-                if(err){
-                    console.error(err);
-                    return -1;
+                if(err || pass_q == null){
+                    console.log("PASSWORD INCORRECT");
+                    res.send(null);
                 }
                 else{
                     console.log("USERNAME CHECK");
-                    if(pass_q == null || user_q == null){
-                        return -1;
-                    }
 
                     if(pass_q.userID == user_id){
-                        console.log(`${user_id} LOGGED IN`)
-                        return user_id;
+                        console.log(`USER ID ${user_id}: LOGGED IN`);
+                        console.log("LOGIN SUCCESS");
+                        if(res != undefined){
+                            res.send(user_id);
+                        }
                     }
                 }
             })
