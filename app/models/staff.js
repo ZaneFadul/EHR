@@ -30,4 +30,4 @@ const schema_staff = new mongoose.Schema({
 
 
 // export module
-module.exports.schema_patient = schema_staff;
+module.exports.schema_staff = schema_staff;
