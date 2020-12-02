@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../Components/Header';
+import Sidebar from '../Components/Sidebar';
 import Footer from '../Components/Footer';
-const role = "patient";
+const role = "staff";
 
 export default class Dashboard extends Component{
   render() {
@@ -16,6 +17,7 @@ export default class Dashboard extends Component{
           minHeight: '100px',
           flex: "1"
         }}>
+          <Sidebar role={role} />
           {this.props.dashpage}
         </div>
         <Footer role={role} />

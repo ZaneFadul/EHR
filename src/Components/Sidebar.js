@@ -1,14 +1,7 @@
 import React from "react";
 import theme from "../Constants/theme";
+import role_sidebars from '../Constants/role_sidebars';
 
-// excluding "Dashboard"
-const sidebarInfo = [
-  "Patients",
-  "Appointments",
-  "Messages",
-  "Drugs",
-  "Settings",
-];
 
 const container_style = {
   width: "20%",
@@ -17,6 +10,8 @@ const container_style = {
 };
 
 export default function Sidebar(props) {
+  const sidebarInfo = role_sidebars[props.role];
+
   return (
     <div>
       <ul className="card collection" style={container_style}>
