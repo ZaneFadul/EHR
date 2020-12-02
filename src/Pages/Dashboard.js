@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Components/Header';
 import Sidebar from '../Components/Sidebar';
 import Footer from '../Components/Footer';
-const role = "staff";
+const role = "patient";
 
 export default class Dashboard extends Component{
   render() {
