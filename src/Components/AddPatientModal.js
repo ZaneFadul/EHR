@@ -54,6 +54,13 @@ class AddPatientModal extends Component {
       tel: this.state.tel,
     };
     this.props.onAdd(newUser);
+    this.setState({
+      name: "",
+      email: "",
+      id: "",
+      tel: "",
+      errors: {},
+    });
   };
 
   render() {

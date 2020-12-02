@@ -36,7 +36,7 @@ class AddAppointmentModal extends Component {
       name: "",
       email: "",
       tel: "",
-      time: "",
+      date: "",
       errors: {},
       isSelected: false,
     };
@@ -51,9 +51,47 @@ class AddAppointmentModal extends Component {
       name: this.state.name,
       email: this.state.email,
       tel: this.state.tel,
-      time: this.state.time,
+      date: this.state.date,
     };
-    this.props.onAdd(newUser);
+
+    if (
+      newUser.name === "" ||
+      newUser.email === "" ||
+      newUser.tel === "" ||
+      newUser.date === ""
+    ) {
+      // M.toast({ ".modal": "I am a toast!" });
+    } else {
+      this.props.onAdd(newUser);
+      var index = this.state.date.indexOf(" ");
+      var daystr = this.state.date.substr(0, index);
+      var timestr = this.state.date.substr(index + 1);
+      var day, time;
+      for (var i in this.props.availableTime) {
+        if (this.props.availableTime[i][0] === daystr) {
+          day = i;
+          console.log(day);
+          for (var j in this.props.availableTime[i][1]) {
+            if (this.props.availableTime[i][1][j][0] === timestr) {
+              time = j;
+              console.log(time);
+              break;
+            }
+          }
+        }
+      }
+      if (day && time) {
+        this.props.handleTimes(day, time);
+      }
+      this.setState({
+        name: "",
+        email: "",
+        tel: "",
+        date: "",
+        errors: {},
+        isSelected: false,
+      });
+    }
   };
 
   render() {
@@ -69,6 +107,7 @@ class AddAppointmentModal extends Component {
         >
           <div className="modal-content">
             <h4>Create New Appointment</h4>
+            <p className="red-text">* You must fill in all the blanks</p>
             <form noValidate onSubmit={this.onSubmit}>
               <div className="input-field col s12">
                 <input
@@ -111,9 +150,23 @@ class AddAppointmentModal extends Component {
                     </p>
                     {this.props.availableTime[weekday][1].map((item, index) => {
                       return (
-                        <label key={index} style={{ display: "block" }}>
-                          <input type="checkbox" />
-                          <span>{item}</span>
+                        <label
+                          key={index}
+                          style={{ display: "block", color: "black" }}
+                        >
+                          <input
+                            type="radio"
+                            name="group1"
+                            id="date"
+                            value={
+                              this.props.availableTime[weekday][0] +
+                              " " +
+                              item[0]
+                            }
+                            onClick={this.onChange}
+                            disabled={item[1] ? "disabled" : ""}
+                          />
+                          <span>{item[0]}</span>
                         </label>
                       );
                     })}
@@ -125,9 +178,23 @@ class AddAppointmentModal extends Component {
                     {this.props.availableTime[(weekday + 1) % 7][1].map(
                       (item, index) => {
                         return (
-                          <label key={index} style={{ display: "block" }}>
-                            <input type="checkbox" />
-                            <span>{item}</span>
+                          <label
+                            key={index}
+                            style={{ display: "block", color: "black" }}
+                          >
+                            <input
+                              type="radio"
+                              name="group1"
+                              id="date"
+                              value={
+                                this.props.availableTime[(weekday + 1) % 7][0] +
+                                " " +
+                                item[0]
+                              }
+                              onClick={this.onChange}
+                              disabled={item[1] ? "disabled" : ""}
+                            />
+                            <span>{item[0]}</span>
                           </label>
                         );
                       }
@@ -140,9 +207,23 @@ class AddAppointmentModal extends Component {
                     {this.props.availableTime[(weekday + 2) % 7][1].map(
                       (item, index) => {
                         return (
-                          <label key={index} style={{ display: "block" }}>
-                            <input type="checkbox" />
-                            <span>{item}</span>
+                          <label
+                            key={index}
+                            style={{ display: "block", color: "black" }}
+                          >
+                            <input
+                              type="radio"
+                              name="group1"
+                              id="date"
+                              value={
+                                this.props.availableTime[(weekday + 2) % 7][0] +
+                                " " +
+                                item[0]
+                              }
+                              onClick={this.onChange}
+                              disabled={item[1] ? "disabled" : ""}
+                            />
+                            <span>{item[0]}</span>
                           </label>
                         );
                       }
@@ -160,7 +241,14 @@ class AddAppointmentModal extends Component {
                     marginTop: "1rem",
                   }}
                   type="submit"
-                  className="modal-close btn btn-large waves-effect hoverable red darken-3"
+                  className={
+                    this.state.name === "" ||
+                    this.state.email === "" ||
+                    this.state.tel === "" ||
+                    this.state.date === ""
+                      ? "waves-effect btn btn-large hoverable red darken-3"
+                      : "modal-close btn btn-large waves-effect hoverable red darken-3"
+                  }
                 >
                   Add
                 </button>

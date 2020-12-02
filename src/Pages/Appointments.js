@@ -9,30 +9,72 @@ const availableTime = [
   ["Sunday", []],
   [
     "Monday",
-    ["14:00 - 14:30", "14:30 - 15:00", "16:00 - 16:30", "17:00 - 17:30"],
+    [
+      ["14:00 - 14:30", false],
+      ["14:30 - 15:00", false],
+      ["16:00 - 16:30", false],
+      ["17:00 - 17:30", false],
+    ],
   ],
   [
     "Tuesday",
-    ["14:00 - 14:30", "14:30 - 15:00", "16:00 - 16:30", "17:00 - 17:30"],
+    [
+      ["14:00 - 14:30", false],
+      ["14:30 - 15:00", false],
+      ["16:00 - 16:30", false],
+      ["17:00 - 17:30", false],
+    ],
   ],
   [
     "Wednesday",
-    ["14:00 - 14:30", "14:30 - 15:00", "16:00 - 16:30", "17:00 - 17:30"],
+    [
+      ["14:00 - 14:30", false],
+      ["14:30 - 15:00", false],
+      ["16:00 - 16:30", false],
+      ["17:00 - 17:30", false],
+    ],
   ],
   [
     "Thursday",
-    ["14:00 - 14:30", "14:30 - 15:00", "16:00 - 16:30", "17:00 - 17:30"],
+    [
+      ["14:00 - 14:30", false],
+      ["14:30 - 15:00", false],
+      ["16:00 - 16:30", false],
+      ["17:00 - 17:30", false],
+    ],
   ],
 
   [
     "Friday",
-    ["14:00 - 14:30", "14:30 - 15:00", "16:00 - 16:30", "17:00 - 17:30"],
+    [
+      ["14:00 - 14:30", false],
+      ["14:30 - 15:00", false],
+      ["16:00 - 16:30", false],
+      ["17:00 - 17:30", false],
+    ],
   ],
-  ["Saturday", ["14:00 - 14:30", "14:30 - 15:00"]],
+  [
+    "Saturday",
+    [
+      ["14:00 - 14:30", false],
+      ["14:30 - 15:00", false],
+      ["16:00 - 16:30", false],
+      ["17:00 - 17:30", false],
+    ],
+  ],
 ];
 
 export default function Appointments(props) {
   const [appointments, setAppointments] = useState([]);
+  const [times, setTimes] = useState(availableTime);
+
+  function handleTimes(day, time) {
+    console.log(day + " " + time);
+    setTimes((prev) => {
+      times[day][1][time][1] = true;
+      return times;
+    });
+  }
 
   function addAppointment(newAppointment) {
     setAppointments((prev) => {
@@ -69,7 +111,8 @@ export default function Appointments(props) {
 
       <AddAppointmentModal
         onAdd={addAppointment}
-        availableTime={availableTime}
+        availableTime={times}
+        handleTimes={handleTimes}
       />
     </div>
   );
