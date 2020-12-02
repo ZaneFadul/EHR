@@ -14,6 +14,7 @@ import Dashboard from "./Pages/Dashboard";
 import Login from "./Pages/Login";
 import PageNotFound from "./Pages/PageNotFound";
 import Register from "./Pages/Register";
+import axios from "axios";
 
 let mode = "lightMode";
 let colorTheme = theme.mainColors[mode];
@@ -23,14 +24,30 @@ class App extends Component {
     super(props);
     this.state = {
       data: null,
-      loggedIn: true,
+      loggedIn: false,
     };
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleLogin() {
-    console.log("Logged in.");
-    this.setState({ loggedIn: true });
+  handleLogin = (userData) => {
+    
+    return axios.post("http://localhost:8080/login", {
+      userData
+    }).then(response => {
+      //user login success
+      console.log(response);
+      if(response.data != null){
+        console.log("LOGIN SUCCESS");
+        this.setState({
+          data: response.data,
+          loggedIn: true
+        })
+      }else{
+        "LOGIN ERROR"
+      }
+    }).catch((error)=>{
+      console.log(error);
+    })
   }
   componentDidMount() {
     // Call our fetch function below once the component mounts
@@ -71,10 +88,9 @@ class App extends Component {
                 <Redirect to="/dashboard" />
               ) : (
                 <Login
-                  handleLogin={() => {
-                    this.handleLogin();
-                    <Redirect to="/dashboard" />;
-                  }}
+                  handleLogin={
+                    this.handleLogin
+                  }
                 />
               )}
             </Route>
