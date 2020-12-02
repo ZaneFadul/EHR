@@ -23,7 +23,7 @@ class App extends Component {
     super(props);
     this.state = {
       data: null,
-      loggedIn: false,
+      loggedIn: true,
     };
     this.handleLogin = this.handleLogin.bind(this);
   }
