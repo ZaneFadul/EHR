@@ -4,7 +4,6 @@ import Footer from '../Components/Footer';
 const role = "patient";
 
 export default class Dashboard extends Component{
-
   render() {
     return (
       <div style={{
