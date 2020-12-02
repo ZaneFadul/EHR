@@ -97,7 +97,7 @@ function createStaff(name, position, permissions, patients, appointments){
 };
 
 function createProvider(name, permissions, plans){
-    return new staff({
+    return new insr_provider({
         name: name,
         permissions: permissions,
         plans: plans
@@ -105,7 +105,7 @@ function createProvider(name, permissions, plans){
 };
 
 function createPlan(name, type, provider, description, start_date, expiration_date, patients){
-    return new staff({
+    return new insr_plan({
         name: name,
         type: type,
         provider: provider,
@@ -117,7 +117,7 @@ function createPlan(name, type, provider, description, start_date, expiration_da
 };
 
 function createAppointmentRecord(title, date, doctorID, patientID, description, time, duration){
-    return new staff({
+    return new appt_record({
         title: title,
         date: date,
         doctorID: doctorID,
@@ -129,7 +129,7 @@ function createAppointmentRecord(title, date, doctorID, patientID, description, 
 };
 
 function createHealthRecord(title, date, patientID, description, type){
-    return new staff({
+    return new health_record({
         title: title,
         date: date,
         patientID: patientID,
@@ -139,7 +139,7 @@ function createHealthRecord(title, date, patientID, description, type){
 };
 
 function createPaymentRecord(title, date, patientID, amount, vendor){
-    return new staff({
+    return new payment_record({
         title: title,
         date: date,
         patientID: patientID,
@@ -149,7 +149,7 @@ function createPaymentRecord(title, date, patientID, amount, vendor){
 };
 
 function createVisitationRecord(title, date, patientID, reason, issue){
-    return new staff({
+    return new visit_record({
         title: title,
         date: date,
         patientID: patientID,
