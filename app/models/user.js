@@ -53,6 +53,11 @@ const schema_user = new mongoose.Schema({
     parent_ID: {
         type: String,
         required: [false]
+    },
+    permissions: {
+        type: [schema_user],
+        required: [false]
+    }
     }
 },{strict:false});
 

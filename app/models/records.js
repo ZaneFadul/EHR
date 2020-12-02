@@ -14,12 +14,12 @@ const schema_record = new mongoose.Schema({
 });
 
 const schema_appointment_record = new mongoose.Schema({
-    doctor: {   
-        type: Schema.Types.ObjectId,
+    doctorID: {   
+        type: String,
         required: [true, 'doctor object is required']
     },
-    patient: {   
-        type: Schema.Types.ObjectId,
+    patientID: {   
+        type: String,
         required: [true, 'patient object is required']
     },
     description: {   
@@ -37,6 +37,10 @@ const schema_appointment_record = new mongoose.Schema({
 });
 
 const schema_health_record = new mongoose.Schema({
+    patientID: {
+        type: String,
+        required: [true, "patientID is required"]
+    },
     type: {   
         type: String,
         required: [true, 'type is required']
@@ -48,6 +52,10 @@ const schema_health_record = new mongoose.Schema({
 });
 
 const schema_payment_record = new mongoose.Schema({
+    patientID: {
+        type: String,
+        required: [true, "patientID is required"]
+    },
     amount: {   
         type: Number,
         required: [true, 'amount is required']
@@ -59,6 +67,10 @@ const schema_payment_record = new mongoose.Schema({
 });
 
 const schema_visitation_record = new mongoose.Schema({
+    patientID: {
+        type: String,
+        required: [true, "patientID is required"]
+    },
     reason: {   
         type: String,
         required: [true, 'reason is required']

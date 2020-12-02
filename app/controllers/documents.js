@@ -18,7 +18,7 @@ const ehr_user = mongoose.model('users', user.schema_user, 'users');
 // const test_med = new med.medication("name", "desc", "dosage", ["side effects"]);
 
 //create user document
-function createUser(type, first_name, last_name, username, password, email, userID, parent_org, parent_id){
+function createUser(type, first_name, last_name, username, password, email, userID, parent_org, parent_id, permissions){
     return new ehr_user({
         type: type,
         first_name: first_name,
@@ -28,7 +28,8 @@ function createUser(type, first_name, last_name, username, password, email, user
         email: email,
         userID: userID,
         parent_org: parent_org,
-        parent_id: parent_id
+        parent_id: parent_id,
+        permissions: permissions
     }).save()
 };
 

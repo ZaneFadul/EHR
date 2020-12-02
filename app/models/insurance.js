@@ -1,4 +1,4 @@
-// Define JS class and MongoDB components for classes related to insurance (providers, plans, data)
+ // Define JS class and MongoDB components for classes related to insurance (providers, plans, data)
 
 const mongoose = require("mongoose");
 
@@ -14,7 +14,7 @@ const schema_provider = new mongoose.Schema({
     plans: {   
         type: Array,
         required: [true, 'plans is required']
-    },
+    }
 });
 
 const schema_plan = new mongoose.Schema({
