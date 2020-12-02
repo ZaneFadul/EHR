@@ -1,15 +1,7 @@
 import React, {Component} from "react";
 import theme from "../Constants/theme";
 import { role_sidebarinfo } from '../Constants/role_sidebars';
-
-
-const container_style = {
-  height: "100%",
-  width: "20%",
-  borderRadius: "15px",
-  margin: "10px",
-  backgroundColor: 'black'
-};
+import './Sidebar.css';
 
 export default class Sidebar extends Component {
   render() {
@@ -17,14 +9,10 @@ export default class Sidebar extends Component {
   const sidebarInfo = role_sidebarinfo[this.props.role];
 
   return (
-    <div style={{
-      position: 'absolute',
-      width: '100%',
-      height: '50%'
-    }}>
-      <ul className="card collection" style={container_style}>
+    <div className='sidebar'>
+      <ul className="card-collection">
         <li className="collection-item"></li>
-        <li>
+        {/*<li>
           <a
             href="/dashboard"
             className="collection-item"
@@ -36,21 +24,22 @@ export default class Sidebar extends Component {
           >
             Dashboard
           </a>
-        </li>
+        </li>*/
+        }
         {sidebarInfo.map((item, index) => {
           return (
-            <li key={index} className="collection-item" 
-            style={{
-              height:'10%',
-              color: `${theme.roleColors[this.props.role]["primary"]}`,
-              borderColor: `${theme.roleColors[this.props.role]["primary"]}`,
+            <li key={index} className="collection-item" id="select"
+              style={{
+                color: `${theme.roleColors[this.props.role]["primary"]}`,
+                borderColor: `${theme.roleColors[this.props.role]["primary"]}`,
               }}
-              onClick={() => this.props.onClick(item)}>
+              onClick={() => this.props.onClick(item)}
+              >
                 {item}
             </li>
           );
         })}
-        <li className="collection-item" style={{ height: '100%' }}></li>
+        <li className="collection-item" id="fill"></li>
         <li className="collection-item">Role: {this.props['role'].charAt(0).toUpperCase() + this.props['role'].slice(1)}</li>
       </ul>
     </div>

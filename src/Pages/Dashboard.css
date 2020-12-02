@@ -6,13 +6,19 @@
 }
 
 .dash-content{
-    min-height: 100px;
-    flex: 1;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  flex: 1;
 }
 
 .dash-page{
-  width:55%;
+  justify-content: center;
+  display: inline-block;
+  align-items: center;
+  width: 55%;
+  min-width: 55em;
+  max-width: 100em;
   margin: auto;
-  background-color: black;
-  color: beige;
 }

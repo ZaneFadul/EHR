@@ -7,7 +7,7 @@ import RemediRecord from './DashboardPages/RemediRecord';
 
 import './Dashboard.css';
 
-const role = "patient";
+const role = "staff";
 
 const sidebar_to_comp = {
   'My Re-medi Health Record': <RemediRecord/>,
@@ -18,7 +18,8 @@ const sidebar_to_comp = {
   'Settings': 'Settings',
   'Patients': 'Patients',
   'Messages': 'Messages',
-  'Clients': 'Clients'
+  'Clients': 'Clients',
+  'Dashboard': null
 };
 export default class Dashboard extends Component{
   constructor(props) {
@@ -37,13 +38,13 @@ export default class Dashboard extends Component{
   }
 
   renderSwitch(dashpage) { 
-    return dashpage === null ? "Let's fill out some health forms!" : dashpage
+    return dashpage === null ? <div className='dash-page' style={{color: '#CCCCCC'}}>Let's fill out some health forms!</div> : dashpage
   }
 
   render() {
     return (
       <div className='dashboard'>
-        <Header role={role} />
+        <Header role={role} onClick={this.handleClick} />
         <div className='dash-content'>
           <Sidebar role={role} onClick={this.handleClick} />
           <div className='dash-page'>
