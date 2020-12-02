@@ -70,6 +70,8 @@ function createPrescription(medications, date, description, start_date, end_date
     }).save()
 };
 
+// test
+
 //export functions
 module.exports.createOrganization = createOrganization;
 module.exports.createPatient = createPatient;
