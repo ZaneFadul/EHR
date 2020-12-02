@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 
+var d = new Date();
+var weekday = d.getDay();
+
 class AddAppointmentModal extends Component {
   componentDidMount() {
-    const options = {
+    const options1 = {
       onOpenStart: () => {
         console.log("Open Start");
       },
@@ -24,12 +27,7 @@ class AddAppointmentModal extends Component {
       startingTop: "4%",
       endingTop: "10%",
     };
-    M.Modal.init(this.Modal, options);
-
-    // let instance = M.Modal.getInstance(this.Modal);
-    // instance.open();
-    // instance.close();
-    // instance.destroy();
+    M.Modal.init(this.Modal, options1);
   }
 
   constructor(props) {
@@ -38,19 +36,22 @@ class AddAppointmentModal extends Component {
       name: "",
       email: "",
       tel: "",
+      time: "",
       errors: {},
+      isSelected: false,
     };
   }
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
+
   onSubmit = (e) => {
     e.preventDefault();
     const newUser = {
       name: this.state.name,
       email: this.state.email,
-      id: this.state.id,
       tel: this.state.tel,
+      time: this.state.time,
     };
     this.props.onAdd(newUser);
   };
@@ -67,7 +68,7 @@ class AddAppointmentModal extends Component {
           className="modal"
         >
           <div className="modal-content">
-            <h4>Add New Patient</h4>
+            <h4>Create New Appointment</h4>
             <form noValidate onSubmit={this.onSubmit}>
               <div className="input-field col s12">
                 <input
@@ -93,23 +94,61 @@ class AddAppointmentModal extends Component {
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
-                  value={this.state.id}
-                  error={errors.id}
-                  id="id"
-                  type="tel"
-                />
-                <label htmlFor="id">ID</label>
-              </div>
-
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
                   value={this.state.tel}
                   error={errors.tel}
                   id="tel"
                   type="tel"
                 />
                 <label htmlFor="tel">Tel</label>
+              </div>
+
+              <div className="col s12" style={{ marginTop: "30px" }}>
+                <h6>Choose Time</h6>
+                <div className="row">
+                  <div className="col s12 m4">
+                    <p style={{ fontSize: "15px", display: "inline-block" }}>
+                      {this.props.availableTime[weekday][0] + "(today)"}
+                    </p>
+                    {this.props.availableTime[weekday][1].map((item, index) => {
+                      return (
+                        <label key={index} style={{ display: "block" }}>
+                          <input type="checkbox" />
+                          <span>{item}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                  <div className="col s12 m4">
+                    <p style={{ fontSize: "15px", display: "inline-block" }}>
+                      {this.props.availableTime[(weekday + 1) % 7][0]}
+                    </p>
+                    {this.props.availableTime[(weekday + 1) % 7][1].map(
+                      (item, index) => {
+                        return (
+                          <label key={index} style={{ display: "block" }}>
+                            <input type="checkbox" />
+                            <span>{item}</span>
+                          </label>
+                        );
+                      }
+                    )}
+                  </div>
+                  <div className="col s12 m4">
+                    <p style={{ fontSize: "15px", display: "inline-block" }}>
+                      {this.props.availableTime[(weekday + 2) % 7][0]}
+                    </p>
+                    {this.props.availableTime[(weekday + 2) % 7][1].map(
+                      (item, index) => {
+                        return (
+                          <label key={index} style={{ display: "block" }}>
+                            <input type="checkbox" />
+                            <span>{item}</span>
+                          </label>
+                        );
+                      }
+                    )}
+                  </div>
+                </div>
               </div>
 
               <div className="col s12" style={{ paddingLeft: "11.250px" }}>

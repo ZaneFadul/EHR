@@ -5,7 +5,31 @@ import AppointmentCard from "../Components/AppointmentCard";
 import AddAppointmentModal from "../Components/AddAppointmentModal";
 import theme from "../Constants/theme";
 
-const availableTime;
+const availableTime = [
+  ["Sunday", []],
+  [
+    "Monday",
+    ["14:00 - 14:30", "14:30 - 15:00", "16:00 - 16:30", "17:00 - 17:30"],
+  ],
+  [
+    "Tuesday",
+    ["14:00 - 14:30", "14:30 - 15:00", "16:00 - 16:30", "17:00 - 17:30"],
+  ],
+  [
+    "Wednesday",
+    ["14:00 - 14:30", "14:30 - 15:00", "16:00 - 16:30", "17:00 - 17:30"],
+  ],
+  [
+    "Thursday",
+    ["14:00 - 14:30", "14:30 - 15:00", "16:00 - 16:30", "17:00 - 17:30"],
+  ],
+
+  [
+    "Friday",
+    ["14:00 - 14:30", "14:30 - 15:00", "16:00 - 16:30", "17:00 - 17:30"],
+  ],
+  ["Saturday", ["14:00 - 14:30", "14:30 - 15:00"]],
+];
 
 export default function Appointments(props) {
   const [appointments, setAppointments] = useState([]);
@@ -43,7 +67,10 @@ export default function Appointments(props) {
         </div>
       </div>
 
-      <AddAppointmentModal onAdd={addAppointment} />
+      <AddAppointmentModal
+        onAdd={addAppointment}
+        availableTime={availableTime}
+      />
     </div>
   );
 }
