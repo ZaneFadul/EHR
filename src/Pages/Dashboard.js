@@ -25,6 +25,7 @@ export default class Dashboard extends Component{
   constructor(props) {
     super(props);
     this.state = {
+      dashpagename: null,
       dashpage: this.props.dashpage === null || this.props.dashpage === undefined ? null : this.props.dashpage
     }
     this.handleClick = this.handleClick.bind(this);
@@ -34,7 +35,10 @@ export default class Dashboard extends Component{
   handleClick(item) {
     const dashpage = sidebar_to_comp[item];
     console.log(`CLICKED ${item} and rendering to ${sidebar_to_comp[item]}`);
-    this.setState({ dashpage: dashpage });
+    this.setState({
+      dashpagename: item,
+      dashpage: dashpage,
+    });
   }
 
   renderSwitch(dashpage) { 
@@ -46,7 +50,7 @@ export default class Dashboard extends Component{
       <div className='dashboard'>
         <Header role={role} onClick={this.handleClick} />
         <div className='dash-content'>
-          <Sidebar role={role} onClick={this.handleClick} />
+          <Sidebar role={role} onClick={this.handleClick} selected={this.state.dashpagename}/>
           <div className='dash-page'>
             {this.renderSwitch(this.state.dashpage)}
           </div>

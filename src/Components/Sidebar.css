@@ -40,3 +40,8 @@
   cursor: pointer;
   background-color: #EEEEEE;
 }
+
+#selected{
+  background-color: #DDDDDD;
+  color: white;
+}

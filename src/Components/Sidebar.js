@@ -28,12 +28,18 @@ export default class Sidebar extends Component {
         }
         {sidebarInfo.map((item, index) => {
           return (
-            <li key={index} className="collection-item" id="select"
-              style={{
-                color: `${theme.roleColors[this.props.role]["primary"]}`,
+            <li key={index} className="collection-item" id={this.props.selected === item ? 'selected' : 'select'}
+              style={this.props.selected === item ? {
+                backgroundColor: `${theme.roleColors[this.props.role]["secondary"]}`,
+                color: `${this.props.selected === item ? '#FFFFFF' : theme.roleColors[this.props.role]["primary"]}`,
+                borderColor: `${theme.roleColors[this.props.role]["primary"]}`,
+              } : {
+                color: `${this.props.selected === item ? '#FFFFFF' : theme.roleColors[this.props.role]["primary"]}`,
                 borderColor: `${theme.roleColors[this.props.role]["primary"]}`,
               }}
-              onClick={() => this.props.onClick(item)}
+              onClick={() => {
+                this.props.onClick(item);
+              }}
               >
                 {item}
             </li>
