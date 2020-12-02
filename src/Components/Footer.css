@@ -1,0 +1,19 @@
+.footer {
+  width: 100%;
+  min-height: 3em;
+  flex: 0 1 5em;
+  margin: auto;
+}
+
+.footer-text{
+  margin: 0.5em;
+  color: white;
+}
+
+#main{
+  font-weight: bold;
+}
+
+#secondary{
+  font-weight: normal;
+}
