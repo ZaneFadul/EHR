@@ -4,10 +4,10 @@ const mongoose = require("mongoose");
 
 class Medication{
     constructor(name, description, dosage, side_effects){
-        this.name = name,
-        this.description = description,
-        this.dosage = dosage
-        this.side_effects = side_effects
+        this.name = name;
+        this.description = description;
+        this.dosage = dosage;
+        this.side_effects = side_effects;
     }
     get all(){
         return [this.name, this.description, this.dosage, this.side_effects];
