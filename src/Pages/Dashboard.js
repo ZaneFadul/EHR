@@ -7,7 +7,7 @@ import RemediRecord from './DashboardPages/RemediRecord';
 
 import './Dashboard.css';
 
-const role = "staff";
+const role = "patient";
 
 const sidebar_to_comp = {
   'My Re-medi Health Record': <RemediRecord/>,
