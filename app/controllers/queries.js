@@ -183,3 +183,4 @@ module.exports.createRecord = createRecord;
 module.exports.register_patient = register_patient;
 module.exports.register_organization_child = register_organization_child;
 module.exports.hasPermission = hasPermission;
+module.exports.getRecords = getRecords;
