@@ -38,7 +38,6 @@ const server = httpServer.listen(port, function () {
     console.log(`listening at port: ${port}`);
 });
 
-<<<<<<< HEAD
 // //test DB schema put in input module in future
 // const testSchema = new mongoose.Schema({
 //     username: {
@@ -98,13 +97,11 @@ const presc = require('./app/models/prescription');
 const med = require('./app/models/medication');
 
 // const splice = new pat.patient(0,0,0,0,"MEN",0,0,0,0,0,0);
-=======
 //rendering pages
 app.get("/test", function(req, res){
     res.send({ express: 'ITS ALIVE!' });
 });
 
->>>>>>> 821a9284c76e3649e772ba8dbc1a4aa2ec737d51
 
 //Connected server to MongoDB Atlas
 const connectionString =  `mongodb://${mongoDB_user}:${mongoDB_pass}@ehr-test-shard-00-00.d1mre.mongodb.net:27017,ehr-test-shard-00-01.d1mre.mongodb.net:27017,ehr-test-shard-00-02.d1mre.mongodb.net:27017/${DB_name}?ssl=true&replicaSet=atlas-c40bxx-shard-0&authSource=admin&retryWrites=true&w=majority`;
@@ -129,12 +126,11 @@ const que = require("./app/controllers/queries");
 
     console.log(`${que.register_organization_child("org_Test","org_test","pass","1","SPLICE")}TEST QUERY`);
 })();
-
-<<<<<<< HEAD
+/*
 patient.find(function(err, Patient){
     if (err) return console.error(err);
     console.log(Patient);
-})
+})*/
 
 
 
@@ -142,8 +138,6 @@ patient.find(function(err, Patient){
 //console.log("TEST", splice.all);
 
 
-=======
->>>>>>> 821a9284c76e3649e772ba8dbc1a4aa2ec737d51
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
