@@ -55,9 +55,8 @@ const schema_user = new mongoose.Schema({
         required: [false]
     },
     permissions: {
-        type: [schema_user],
+        type: Array,
         required: [false]
-    }
     }
 },{strict:false});
 

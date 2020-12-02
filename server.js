@@ -31,7 +31,6 @@ app.use(cookieParser());
 //directory to serve static REACT files
 app.use(express.static(path.join(__dirname, 'src')));
 
-console.log("poopie");
 // http server
 const port = PORT || 3000;
 const server = httpServer.listen(port, function () {
@@ -64,8 +63,16 @@ const que = require("./app/controllers/queries");
     // patient_arg = ["name",new Date(), "test","test","test","test","test","test","test","test","test"];
     // que.createRecord(doc.ehr_user, doc.createUser, ["t","t","t","t","p","e","u"]);
 
-    console.log(`${que.register_organization_child("org_Test","org_test","pass","1","SPLICE")}TEST QUERY`);
+    // console.log(`${que.register_organization_child("org_Test","org_test","pass",undefined,"1","SPLICE")}TEST QUERY`);
 })();
+
+app.post("/register", function(req, res){
+    const name = req.body.newUser.name;
+    const email = req.body.newUser.email;
+    const pass = req.body.newUser.password;
+
+    que.register_patient(name, email, pass, res);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

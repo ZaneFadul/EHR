@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import axios from "axios";
 
 class Register extends Component {
   constructor() {
@@ -23,6 +24,22 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2,
     };
+    if(newUser.password === newUser.password2){
+      axios.post("http://localhost:8080/register", {newUser}).then(function(res){
+        console.log(res.data);  
+        if(res.data == '-2'){
+          console.log("Account with Username exists");
+        }else if(res.data == '-3'){
+          console.log("Account with email exists");
+        }
+        else{
+          console.log("REGISTRATION SUCCESS");
+          // redirect to login page
+        }
+
+        
+      })
+    }
     console.log(newUser);
   };
   render() {
