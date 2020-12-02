@@ -37,14 +37,8 @@ const server = httpServer.listen(port, function () {
     console.log(`listening at port: ${port}`);
 });
 
-//rendering pages
-app.get("/test", function(req, res){
-    res.send({ express: 'ITS ALIVE!' });
-});
-
 //Connected server to MongoDB Atlas
 const connectionString =  `mongodb://${mongoDB_user}:${mongoDB_pass}@ehr-test-shard-00-00.d1mre.mongodb.net:27017,ehr-test-shard-00-01.d1mre.mongodb.net:27017,ehr-test-shard-00-02.d1mre.mongodb.net:27017/${DB_name}?ssl=true&replicaSet=atlas-c40bxx-shard-0&authSource=admin&retryWrites=true&w=majority`;
-
 //import documents
 const doc = require("./app/controllers/documents");
 //import queries
@@ -52,19 +46,32 @@ const que = require("./app/controllers/queries");
 
 ;(async () =>{
     
-    const connector = await mongoose.connect(connectionString,{
+    const connector = mongoose.connect(connectionString,{
         useNewUrlParser: true,
-        useUnifiedTopology: true, 
+        useUnifiedTopology: true,
         useFindAndModify: false,
         useCreateIndex: true
     });
 
     //test queries
     // patient_arg = ["name",new Date(), "test","test","test","test","test","test","test","test","test"];
-    // que.createRecord(doc.ehr_user, doc.createUser, ["t","t","t","t","p","e","u"]);
+    // que.createRecord(doc.patient, doc.createPatient, patient_arg);
+
+    // console.log(`${que.register("teestee","teestee","p")}TEST QUERY`);
 
     // console.log(`${que.register_organization_child("org_Test","org_test","pass",undefined,"1","SPLICE")}TEST QUERY`);
 })();
+
+
+//post requests
+app.post("/login", async function(req, res){
+    const form_email = req.body.userData.email;
+    const form_pass = req.body.userData.password;
+    console.log("EMAIL: ",form_email,"- PASS: ",form_pass);
+    console.log(res);
+    //login check
+    que.login(form_email, form_pass, res);
+});
 
 app.post("/register", function(req, res){
     const name = req.body.newUser.name;
