@@ -4,19 +4,27 @@ import Sidebar from '../Components/Sidebar';
 import Footer from '../Components/Footer';
 
 import RemediRecord from './DashboardPages/RemediRecord';
+import Appointments from './DashboardPages/Appointments';
+import Clients from './DashboardPages/Clients';
+import InsurancePlan from './DashboardPages/InsurancePlan';
+import Messages from './DashboardPages/Messages';
+import Patients from './DashboardPages/Patients';
+import Prescriptions from './DashboardPages/Prescriptions';
+import Settings from './DashboardPages/Settings';
+import Records from './DashboardPages/Records';
 
 import './Dashboard.css';
 
 const sidebar_to_comp = {
   'My Re-medi Health Record': <RemediRecord/>,
-  'Appointments': 'Appointments',
-  'Prescriptions': 'Prescriptions',
-  'Medical Records': 'Records',
-  'My Insurance Plan': 'InsurancePlan',
-  'Settings': 'Settings',
-  'Patients': 'Patients',
-  'Messages': 'Messages',
-  'Clients': 'Clients',
+  'Appointments': <Appointments />,
+  'Prescriptions': <Prescriptions/>,
+  'Medical Records': <Records />,
+  'My Insurance Plan': <InsurancePlan/>,
+  'Settings': <Settings/>,
+  'Patients': <Patients/>,
+  'Messages': <Messages/>,
+  'Clients': <Clients/>,
   'Dashboard': null
 };
 export default class Dashboard extends Component{
