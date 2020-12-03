@@ -1,55 +1,54 @@
-import React from "react";
+import React, {Component} from "react";
 import theme from "../Constants/theme";
+import { role_sidebarinfo } from '../Constants/role_sidebars';
+import './Sidebar.css';
 
-// excluding "Dashboard"
-const sidebarInfo = [
-  "Patients",
-  "Appointments",
-  "Messages",
-  "Drugs",
-  "Settings",
-];
+export default class Sidebar extends Component {
+  render() {
+    
+  const sidebarInfo = role_sidebarinfo[this.props.role];
 
-const container_style = {
-  width: "20%",
-  borderRadius: "15px",
-  margin: "10px",
-};
-
-export default function Sidebar(props) {
   return (
-    <div>
-      <ul className="card collection" style={container_style}>
+    <div className='sidebar'>
+      <ul className="card-collection">
         <li className="collection-item"></li>
-        <li>
+        {/*<li>
           <a
             href="/dashboard"
             className="collection-item"
             style={{
+              height: '10%',
               color: "white",
-              backgroundColor: `${theme.roleColors[props.role]["primary"]}`,
+              backgroundColor: `${theme.roleColors[this.props.role]["primary"]}`,
             }}
           >
             Dashboard
           </a>
-        </li>
+        </li>*/
+        }
         {sidebarInfo.map((item, index) => {
           return (
-            <li key={index}>
-              <a
-                href="/patient"
-                className="collection-item"
-                style={{
-                  color: `${theme.roleColors[props.role]["primary"]}`,
-                  borderColor: `${theme.roleColors[props.role]["primary"]}`,
-                }}
+            <li key={index} className="collection-item" id={this.props.selected === item ? 'selected' : 'select'}
+              style={this.props.selected === item ? {
+                backgroundColor: `${theme.roleColors[this.props.role]["secondary"]}`,
+                color: `${this.props.selected === item ? '#FFFFFF' : theme.roleColors[this.props.role]["primary"]}`,
+                borderColor: `${theme.roleColors[this.props.role]["primary"]}`,
+              } : {
+                color: `${this.props.selected === item ? '#FFFFFF' : theme.roleColors[this.props.role]["primary"]}`,
+                borderColor: `${theme.roleColors[this.props.role]["primary"]}`,
+              }}
+              onClick={() => {
+                this.props.onClick(item);
+              }}
               >
                 {item}
-              </a>
             </li>
           );
         })}
+        <li className="collection-item" id="fill"></li>
+        <li className="collection-item">Role: {this.props['role'].charAt(0).toUpperCase() + this.props['role'].slice(1)}</li>
       </ul>
     </div>
   );
+  };
 }
