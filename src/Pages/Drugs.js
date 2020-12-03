@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-
-import DrugSearchForm from "../components/DrugSearchForm";
-import Loader from "../components/Loader";
-import DrugList from "../components/DrugList";
+import Header from "../Components/Header";
+import Sidebar from "../Components/Sidebar";
+import DrugSearchForm from "../Components/DrugSearchForm";
+import Loader from "../Components/Loader";
+import DrugList from "../Components/DrugList";
 
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -35,16 +36,25 @@ const SearchPage = () => {
   };
 
   return (
-    <>
-      <DrugSearchForm
-        onSubmitHandler={onSubmitHandler}
-        onInputChange={onInputChange}
-        searchTerm={searchTerm}
-        error={error}
-      />
-      <Loader searchTerm={searchTerm} loading={loading} />
-      <DrugList books={books} />
-    </>
+    <div>
+      <Header role="staff" />
+      <Sidebar role="staff" active="Drugs" />
+      <div className="page-container">
+        <div className="title-container">
+          <h4>Find Drugs</h4>
+        </div>
+        <div>
+          <DrugSearchForm
+            onSubmitHandler={onSubmitHandler}
+            onInputChange={onInputChange}
+            searchTerm={searchTerm}
+            error={error}
+          />
+          <Loader searchTerm={searchTerm} loading={loading} />
+          <DrugList books={books} />
+        </div>
+      </div>
+    </div>
   );
 };
 

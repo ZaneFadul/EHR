@@ -8,16 +8,18 @@ const DrugSearchForm = ({
 }) => {
   return (
     <form onSubmit={onSubmitHandler}>
-      <label>
-        <span>Search for books</span>
+      <label className="row">
         <input
           type="search"
-          placeholder="microservice, restful design, etc.,"
+          placeholder="Searching for drugs..."
           value={searchTerm}
           onChange={onInputChange}
           required
+          style={{ width: "60%", margin: "20px" }}
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="btn-floating waves-effect red">
+          <i class="large material-icons">search</i>
+        </button>
       </label>
       {error && (
         <div style={{ color: `red` }}>
