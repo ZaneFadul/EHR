@@ -25,6 +25,8 @@ class App extends Component {
     this.state = {
       data: null,
       loggedIn: false,
+      userID: null,
+      userType: null
     };
     this.handleLogin = this.handleLogin.bind(this);
   }
@@ -35,15 +37,17 @@ class App extends Component {
     }).then(response => {
       //user login success
       console.log(response);
-      if(response.data != null){
+      if(response.data != ""){
         console.log("LOGIN SUCCESS");
         this.setState({
-          data: response.data,
+          userID: response.data.userID,
+          userType: response.data.type,
           loggedIn: true
         })
       }else{
         console.log("LOGIN ERROR");
       }
+      console.log("USERID", this.state.userID,"USERTYPE", this.state.userType);
     }).catch((error)=>{
       console.log(error);
     })

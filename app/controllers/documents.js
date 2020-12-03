@@ -129,13 +129,10 @@ function createAppointmentRecord(title, date, doctorID, patientID, description, 
     }).save()
 };
 
-function createHealthRecord(title, date, patientID, description, type){
+function createHealthRecord(patientID, data){
     return new health_record({
-        title: title,
-        date: date,
         patientID: patientID,
-        description: description,
-        type: type
+        data: data
     }).save()
 };
 
