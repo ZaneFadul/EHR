@@ -132,9 +132,20 @@ function register_organization_child(user, mail, pass, org_id, org_name){
     register(user, mail, pass, org_id, org_name);
 }
 
+function hasPermission(userID1, userID2, res){
+    doc.model_user.findOne({userID:userID2},function(err,user){
+        if(user.permissions.includes(userID1)){
+            res.send("1");
+        }else{
+            res.send("-1");
+        }
+    })
+}
+
 
 module.exports.login = login;
 module.exports.register = register;
 module.exports.createRecord = createRecord;
 module.exports.register_patient = register_patient;
 module.exports.register_organization_child = register_organization_child;
+module.exports.hasPermission = hasPermission;
