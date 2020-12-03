@@ -30,7 +30,6 @@ class App extends Component {
   }
 
   handleLogin = (userData) => {
-    
     return axios.post("http://localhost:8080/login", {
       userData
     }).then(response => {
@@ -49,6 +48,17 @@ class App extends Component {
       console.log(error);
     })
   }
+
+  // // handle records
+  // handleRecords = (userID) => {
+  //   return axios.post("http://localhost:8080/login", {
+  //     userID
+  //   }).then(response => {
+  //     //records retrieved
+  //     console.log(response);
+  //     //set data to fields
+  //   })
+  // }
 
   componentDidMount() {
     // Call our fetch function below once the component mounts

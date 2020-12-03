@@ -90,7 +90,8 @@ function register(name, email, password, response, ...parent){
                                         console.log("TEST")
                                         if(org_array[2] == "Insurance"){
                                             createRecord(doc.model_user, doc.createUser, [org_array[2],,, name, password, email, (res+1).toString().padStart(10,"0"),org_array[1],org_array[0]]);  
-                                            createRecord(doc.model_insr_provider, doc.createProvider, [name,[],[]]);
+                                            // createRecord(doc.model_insr_provider, doc.createProvider, [name,[],[]]);
+                                        }
                                         else if(org_array[2] == "Healthcare"){
                                             createRecord(doc.model_user, doc.createUser, [org_array[2],,, name, password, email, (res+1).toString().padStart(10,"0"),org_array[1],org_array[0]]);  
                                             createRecord(doc.model_staff, doc.createStaff, [(res+1).toString().padStart(10,"0"), name, "doctor", [],[],[]])
@@ -182,6 +183,15 @@ function getRecords(user_id1, user_id2, type, res){
     })
 }
 
+function addVisitationRecords(title, date, userID, patientID, reason, issue, res){
+    doc.model_user.findOne({patientID:userID},function(err,user){
+        if(user.permissions.includes(userID1)){
+            createRecord(doc.model_visit_record, doc.createVisitationRecord, [title, date, patientID, reason, issue]);
+        }else{
+            res.send("-1");
+        }
+    })
+}
 
 module.exports.login = login;
 module.exports.register = register;
@@ -190,3 +200,4 @@ module.exports.register_patient = register_patient;
 module.exports.register_organization_child = register_organization_child;
 module.exports.hasPermission = hasPermission;
 module.exports.getRecords = getRecords;
+module.exports.addVisitationRecords = addVisitationRecords;
