@@ -30,7 +30,9 @@ async function login(email, password, res){
         email:email
     }, function(err,user_q){
         //return -1 if error
-        if(err || user_q == null){  
+        if(err || user_q == null){
+            console.log(err);
+            console.log(user_q);
             console.log("EMAIL NOT FOUND");
             res.send(null);
         }else{
@@ -51,7 +53,7 @@ async function login(email, password, res){
                         console.log(`USER ID ${user_id}: LOGGED IN`);
                         console.log("LOGIN SUCCESS");
                         if(res != undefined){
-                            res.send(user_id);
+                            res.send(pass_q);
                         }
                     }
                 }
@@ -107,7 +109,7 @@ function register(name, email, password, response, ...parent){
                                 }, function(err,id){
                                     console.log(`${id.userID}: ID registerd`);
                                     if(response != undefined){
-                                        response.send(id.userID)
+                                        response.send(id)
                                     }
                                 });
                             })();
@@ -154,24 +156,24 @@ function getRecords(user_id1, user_id2, type, res){
         if(user.permissions.includes(user_id1)){
             if(type == "visitation"){
                 //send visitation records to client
-                doc.model_visit_record.findOne({userID:user_id2}), function(err, record){
+                doc.model_visit_record.findOne({userID:user_id2}, function(err, record){
                     res.send(record);
-                };
+                });
             }else if(type == "payment"){
                 //send payment records to client
-                doc.model_payment_record.findOne({userID:user_id2}), function(err, record){
+                doc.model_payment_record.findOne({userID:user_id2}, function(err, record){
                     res.send(record);
-                };
+                });
             }else if(type == "health"){
                 //send health records to client
-                doc.model_health_record.findOne({userID:user_id2}), function(err, record){
+                doc.model_health_record.findOne({userID:user_id2}, function(err, record){
                     res.send(record);
-                };
+                });
             }else if(type == "appointment"){
                 //send appointment records to client
-                doc.model_appt_record.findOne({userID:user_id2}), function(err, record){
+                doc.model_appt_record.findOne({userID:user_id2}, function(err, record){
                     res.send(record);
-                };
+                });
             }else{
                 res.send("-1");
             }
@@ -183,6 +185,7 @@ function getRecords(user_id1, user_id2, type, res){
     })
 }
 
+
 function addVisitationRecords(title, date, userID, patientID, reason, issue, res){
     doc.model_user.findOne({patientID:userID},function(err,user){
         if(user.permissions.includes(userID1)){
@@ -193,6 +196,19 @@ function addVisitationRecords(title, date, userID, patientID, reason, issue, res
     })
 }
 
+//find and modify health record
+async function modifyHealthRecord(data, userID, res){
+    //check if user has health records, if no records upsert
+    let doc = await doc.model_health_record.findOneAndUpdate(
+        {patientID:userID},{data:data}, {
+            new:true,
+            upsert: true
+        }
+    )
+    res.send(doc);
+}
+
+
 module.exports.login = login;
 module.exports.register = register;
 module.exports.createRecord = createRecord;
@@ -201,3 +217,5 @@ module.exports.register_organization_child = register_organization_child;
 module.exports.hasPermission = hasPermission;
 module.exports.getRecords = getRecords;
 module.exports.addVisitationRecords = addVisitationRecords;
+module.exports.modifyHealthRecord = modifyHealthRecord;
+
