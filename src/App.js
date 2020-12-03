@@ -43,12 +43,13 @@ class App extends Component {
           loggedIn: true
         })
       }else{
-        "LOGIN ERROR"
+        console.log("LOGIN ERROR");
       }
     }).catch((error)=>{
       console.log(error);
     })
   }
+
   componentDidMount() {
     // Call our fetch function below once the component mounts
     this.callBackendAPI()

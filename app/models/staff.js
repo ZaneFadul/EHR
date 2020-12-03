@@ -6,11 +6,15 @@ const mongoose = require("mongoose");
 // Define Staff MongoDB component
 
 const schema_staff = new mongoose.Schema({
+    userID: {
+        type: String,
+        required: [true, "userID is required"]
+    },
     name: {   
         type: String,
         required: [true, 'name is required']
     },
-    position: {   
+    position: {
         type: String,
         required: [true, 'position is required']
     },

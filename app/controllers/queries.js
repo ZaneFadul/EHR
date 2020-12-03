@@ -88,7 +88,13 @@ function register(name, email, password, response, ...parent){
                                     //check if user is org user or patient
                                     if(parent != null){
                                         console.log("TEST")
-                                        createRecord(doc.model_user, doc.createUser, ["Patient",,, name, password, email, (res+1).toString().padStart(10,"0"),org_array[1],org_array[0]]);    
+                                        if(org_array[2] == "Insurance"){
+                                            createRecord(doc.model_user, doc.createUser, [org_array[2],,, name, password, email, (res+1).toString().padStart(10,"0"),org_array[1],org_array[0]]);  
+                                            createRecord(doc.model_insr_provider, doc.createProvider, [name,[],[]]);
+                                        else if(org_array[2] == "Healthcare"){
+                                            createRecord(doc.model_user, doc.createUser, [org_array[2],,, name, password, email, (res+1).toString().padStart(10,"0"),org_array[1],org_array[0]]);  
+                                            createRecord(doc.model_staff, doc.createStaff, [(res+1).toString().padStart(10,"0"), name, "doctor", [],[],[]])
+                                        }  
                                     }else{
                                         createRecord(doc.model_user, doc.createUser, ["Patient",,, name, password, email, (res+1).toString().padStart(10,"0"),,]);    
                                     }
@@ -128,8 +134,8 @@ function register_patient(user, mail, pass, res){
     register(user, mail, pass, res);
 }
 
-function register_organization_child(user, mail, pass, org_id, org_name){
-    register(user, mail, pass, org_id, org_name);
+function register_organization_child(user, mail, pass, res, type, org_id, org_name){
+    register(user, mail, pass, res, org_id, org_name, type);
 }
 
 function hasPermission(userID1, userID2, res){

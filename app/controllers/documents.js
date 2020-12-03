@@ -86,8 +86,9 @@ function createPrescription(medications, date, description, start_date, end_date
     }).save()
 };
 
-function createStaff(name, position, permissions, patients, appointments){
+function createStaff(id, name, position, permissions, patients, appointments){
     return new staff({
+        userID: id,
         name: name,
         position: position,
         permissions: permissions,
