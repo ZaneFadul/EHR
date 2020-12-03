@@ -76,7 +76,7 @@ const schema_visitation_record = new mongoose.Schema({
         required: [true, "title is required"]
     },
     date: {
-        type: Date
+        type: Date,
         required: [true, "payment date is required"]
     },
     patientID: {
