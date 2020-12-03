@@ -1,5 +1,5 @@
 # Re-Medi
-Project for CSCI-SHU 410 by Andrew Lee, Andrew Liu, Xin Xiang, Zane Fadul
+Project for CSCI-SHU 410 by Andrew Lee, Andrew Liu, Xin Xiang, Zane Fadul\
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
