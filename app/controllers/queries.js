@@ -141,6 +141,40 @@ function hasPermission(userID1, userID2, res){
         }
     })
 }
+//user_id1: current user, user_id2: searched user
+function getRecords(user_id1, user_id2, type, res){
+    doc.model_user.findOne({userID:user_id2},function(err,user){
+        if(user.permissions.includes(user_id1)){
+            if(type == "visitation"){
+                //send visitation records to client
+                doc.model_visit_record.findOne({userID:user_id2}), function(err, record){
+                    res.send(record);
+                };
+            }else if(type == "payment"){
+                //send payment records to client
+                doc.model_payment_record.findOne({userID:user_id2}), function(err, record){
+                    res.send(record);
+                };
+            }else if(type == "health"){
+                //send health records to client
+                doc.model_health_record.findOne({userID:user_id2}), function(err, record){
+                    res.send(record);
+                };
+            }else if(type == "appointment"){
+                //send appointment records to client
+                doc.model_appt_record.findOne({userID:user_id2}), function(err, record){
+                    res.send(record);
+                };
+            }else{
+                res.send("-1");
+            }
+            
+
+        }else{
+            res.send("-1");
+        }
+    })
+}
 
 
 module.exports.login = login;
@@ -149,3 +183,4 @@ module.exports.createRecord = createRecord;
 module.exports.register_patient = register_patient;
 module.exports.register_organization_child = register_organization_child;
 module.exports.hasPermission = hasPermission;
+module.exports.getRecords = getRecords;
