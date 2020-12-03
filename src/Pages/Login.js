@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import axios from "axios";
 
 class Login extends Component {
   constructor(props) {
@@ -17,15 +16,12 @@ class Login extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     //axios post method w webserver
-
     const userData = {
       email: this.state.email,
       password: this.state.password
     };
 
     this.props.handleLogin(userData);
-
-    console.log(userData);
   };
   render() {
     const { errors } = this.state;

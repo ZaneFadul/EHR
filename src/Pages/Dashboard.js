@@ -7,8 +7,6 @@ import RemediRecord from './DashboardPages/RemediRecord';
 
 import './Dashboard.css';
 
-const role = "patient";
-
 const sidebar_to_comp = {
   'My Re-medi Health Record': <RemediRecord/>,
   'Appointments': 'Appointments',
@@ -46,6 +44,7 @@ export default class Dashboard extends Component{
   }
 
   render() {
+    const role = this.props.role;
     return (
       <div className='dashboard'>
         <Header role={role} onClick={this.handleClick} />
