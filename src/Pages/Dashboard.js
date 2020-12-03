@@ -7,7 +7,7 @@ import "./PageContainer.css";
 const dashboardInfo = {};
 
 const buttonstyle = {
-  margin: "10px 0",
+  margin: "20px 0",
   width: "200px",
 };
 
@@ -18,18 +18,19 @@ export default class Dashboard extends Component {
         <Header role="staff" />
         <Sidebar role="staff" active="Dashboard" />
         <div className="page-container">
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <DashboardCard />
-            <DashboardCard />
-            <DashboardCard />
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <DashboardCard />
-            <DashboardCard />
-            <DashboardCard />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "80px",
+            }}
+          >
+            <DashboardCard title="PATIENTS" img="accessible" />
+            <DashboardCard title="APPOINTMENTS" img="book_online" />
+            <DashboardCard title="MESSAGES" img="chat" />
           </div>
 
-          <div style={{ display: "flex", marginTop: "30px" }}>
+          <div style={{ display: "flex", marginTop: "50px" }}>
             <div
               style={{
                 display: "flex",
@@ -38,28 +39,28 @@ export default class Dashboard extends Component {
               }}
             >
               <a
-                class="waves-effect waves-light btn-large red darken-2"
+                class="waves-effect waves-light btn-large red darken-4"
                 style={buttonstyle}
                 href="/patients"
               >
                 Add Patient
               </a>
               <a
-                class="waves-effect waves-light btn-large red darken-2"
+                class="waves-effect waves-light btn-large red darken-4"
                 style={buttonstyle}
                 href="/appointments"
               >
                 Add Appointment
               </a>
               <a
-                class="waves-effect waves-light btn-large red darken-2"
+                class="waves-effect waves-light btn-large red darken-4"
                 style={buttonstyle}
                 href="/drugs"
               >
-                Find Medicine
+                Find Drug
               </a>
               <a
-                class="waves-effect waves-light btn-large red darken-2"
+                class="waves-effect waves-light btn-large red darken-4"
                 style={buttonstyle}
                 href="/settings"
               >

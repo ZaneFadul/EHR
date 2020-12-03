@@ -9,9 +9,9 @@ const appointmentCard = {
   boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
 };
 
-export default function DashboardCard() {
+export default function DashboardCard(props) {
   return (
-    <div style={appointmentCard}>
+    <a style={appointmentCard} href={"/" + props.title.toLowerCase()}>
       <div
         className="card-content"
         style={{
@@ -21,21 +21,21 @@ export default function DashboardCard() {
         }}
       >
         <div
-          className="red-text"
           style={{
+            color: "#BA001F",
             width: "40%",
           }}
         >
-          <i className="small material-icons">insert_chart</i>
+          <i className="small material-icons">{props.img}</i>
         </div>
         <div
-          className="red white-text darken-2"
+          className="red white-text darken-4"
           style={{ padding: "5px", width: "60%" }}
         >
           <h5>7</h5>
-          <p>doctors</p>
+          <p>{props.title}</p>
         </div>
       </div>
-    </div>
+    </a>
   );
 }

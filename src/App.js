@@ -18,7 +18,9 @@ import Patients from "./Pages/Patients";
 import Appointments from "./Pages/Appointments";
 import AppointmentDetail from "./Pages/AppointmentDetail";
 import PatientDetail from "./Pages/PatientDetail";
-import Drugs from "Pages/Drugs";
+import Drugs from "./Pages/Drugs";
+import Messages from "./Pages/Messages";
+import Settings from "./Pages/Settings";
 
 let mode = "lightMode";
 let colorTheme = theme.mainColors[mode];
@@ -101,6 +103,14 @@ class App extends Component {
             </Route>
             <Route path="/drugs">
               <Drugs />
+            </Route>
+
+            <Route path="/messages">
+              <Messages />
+            </Route>
+
+            <Route path="/settings">
+              <Settings />
             </Route>
 
             <Route path="*" component={PageNotFound} />
