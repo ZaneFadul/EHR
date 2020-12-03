@@ -40,24 +40,28 @@ export default class Dashboard extends Component {
               <a
                 class="waves-effect waves-light btn-large red darken-2"
                 style={buttonstyle}
+                href="/patients"
               >
                 Add Patient
               </a>
               <a
                 class="waves-effect waves-light btn-large red darken-2"
                 style={buttonstyle}
+                href="/appointments"
               >
                 Add Appointment
               </a>
               <a
                 class="waves-effect waves-light btn-large red darken-2"
                 style={buttonstyle}
+                href="/drugs"
               >
-                Add Medicine
+                Find Medicine
               </a>
               <a
                 class="waves-effect waves-light btn-large red darken-2"
                 style={buttonstyle}
+                href="/settings"
               >
                 View Profile
               </a>

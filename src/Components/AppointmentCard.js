@@ -18,7 +18,7 @@ export default function AppointmentCard(props) {
         <div className="card-action">
           <a
             className="red-text text-darken-3"
-            href={"#appointment" + props.id}
+            href={"/appointments/" + props.id}
           >
             VIEW DETAILS
           </a>
