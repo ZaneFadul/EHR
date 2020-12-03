@@ -30,7 +30,9 @@ async function login(email, password, res){
         email:email
     }, function(err,user_q){
         //return -1 if error
-        if(err || user_q == null){  
+        if(err || user_q == null){
+            console.log(err);
+            console.log(user_q);
             console.log("EMAIL NOT FOUND");
             res.send(null);
         }else{
@@ -51,7 +53,7 @@ async function login(email, password, res){
                         console.log(`USER ID ${user_id}: LOGGED IN`);
                         console.log("LOGIN SUCCESS");
                         if(res != undefined){
-                            res.send(user_id);
+                            res.send(pass_q);
                         }
                     }
                 }
@@ -100,7 +102,7 @@ function register(name, email, password, response, ...parent){
                                 }, function(err,id){
                                     console.log(`${id.userID}: ID registerd`);
                                     if(response != undefined){
-                                        response.send(id.userID)
+                                        response.send(id)
                                     }
                                 });
                             })();
