@@ -68,7 +68,7 @@ app.post("/login", async function(req, res){
     const form_email = req.body.userData.email;
     const form_pass = req.body.userData.password;
     console.log("EMAIL: ",form_email,"- PASS: ",form_pass);
-    console.log(res);
+    // console.log(res);
     //login check
     que.login(form_email, form_pass, res);
 });
@@ -81,15 +81,6 @@ app.post("/register", function(req, res){
     que.register_patient(name, email, pass, res);
 });
 
-//post requests
-app.post("/login", async function(req, res){
-    const form_email = req.body.userData.email;
-    const form_pass = req.body.userData.password;
-    console.log("EMAIL: ",form_email,"- PASS: ",form_pass);
-    console.log(res);
-    //login check
-    que.login(form_email, form_pass, res);
-});
 
 
 // catch 404 and forward to error handler
