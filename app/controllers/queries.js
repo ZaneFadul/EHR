@@ -61,7 +61,7 @@ async function login(email, password, res){
 }
 
 //implement Registration Query Function
-function register(name, email, password, ...parent){
+function register(name, email, password, response, ...parent){
     //makes array from spread parameters
     org_array = Array.from(parent)
     doc.model_user.findOne(
@@ -99,27 +99,33 @@ function register(name, email, password, ...parent){
                                     username:name
                                 }, function(err,id){
                                     console.log(`${id.userID}: ID registerd`);
-                                    return id.userID;
+                                    if(response != undefined){
+                                        response.send(id.userID)
+                                    }
                                 });
                             })();
                         }
                         else{
                             console.log("Account with email exists");
                             //return -3 if account exists with email
-                            return -3;
+                            if(response != undefined){
+                                response.send('-3');
+                            }
                         }
                 });
             }
             else{
                 console.log("Account with username exists");
                 //return -2 if username exists, until socketio is implemented
-                return -2;
+                if(response != undefined){
+                    response.send('-2');
+                }
             }
     });
 }
 
-function register_patient(user, mail, pass){
-    register(user, mail, pass);
+function register_patient(user, mail, pass, res){
+    register(user, mail, pass, res);
 }
 
 function register_organization_child(user, mail, pass, org_id, org_name){

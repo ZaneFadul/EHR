@@ -59,7 +59,7 @@ const que = require("./app/controllers/queries");
 
     // console.log(`${que.register("teestee","teestee","p")}TEST QUERY`);
 
-    // console.log(`${que.register_organization_child("org_Test","org_test","pass","1","SPLICE")}TEST QUERY`);
+    // console.log(`${que.register_organization_child("org_Test","org_test","pass",undefined,"1","SPLICE")}TEST QUERY`);
 })();
 
 
@@ -73,6 +73,13 @@ app.post("/login", async function(req, res){
     que.login(form_email, form_pass, res);
 });
 
+app.post("/register", function(req, res){
+    const name = req.body.newUser.name;
+    const email = req.body.newUser.email;
+    const pass = req.body.newUser.password;
+
+    que.register_patient(name, email, pass, res);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
