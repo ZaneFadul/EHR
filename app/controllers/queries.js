@@ -90,7 +90,14 @@ function register(name, email, password, response, ...parent){
                                     //check if user is org user or patient
                                     if(parent != null){
                                         console.log("TEST")
-                                        createRecord(doc.model_user, doc.createUser, ["Patient",,, name, password, email, (res+1).toString().padStart(10,"0"),org_array[1],org_array[0]]);    
+                                        if(org_array[2] == "Insurance"){
+                                            createRecord(doc.model_user, doc.createUser, [org_array[2],,, name, password, email, (res+1).toString().padStart(10,"0"),org_array[1],org_array[0]]);  
+                                            // createRecord(doc.model_insr_provider, doc.createProvider, [name,[],[]]);
+                                        }
+                                        else if(org_array[2] == "Healthcare"){
+                                            createRecord(doc.model_user, doc.createUser, [org_array[2],,, name, password, email, (res+1).toString().padStart(10,"0"),org_array[1],org_array[0]]);  
+                                            createRecord(doc.model_staff, doc.createStaff, [(res+1).toString().padStart(10,"0"), name, "doctor", [],[],[]])
+                                        }  
                                     }else{
                                         createRecord(doc.model_user, doc.createUser, ["Patient",,, name, password, email, (res+1).toString().padStart(10,"0"),,]);    
                                     }
@@ -130,8 +137,8 @@ function register_patient(user, mail, pass, res){
     register(user, mail, pass, res);
 }
 
-function register_organization_child(user, mail, pass, org_id, org_name){
-    register(user, mail, pass, org_id, org_name);
+function register_organization_child(user, mail, pass, res, type, org_id, org_name){
+    register(user, mail, pass, res, org_id, org_name, type);
 }
 
 function hasPermission(userID1, userID2, res){
@@ -178,6 +185,17 @@ function getRecords(user_id1, user_id2, type, res){
     })
 }
 
+
+function addVisitationRecords(title, date, userID, patientID, reason, issue, res){
+    doc.model_user.findOne({patientID:userID},function(err,user){
+        if(user.permissions.includes(userID1)){
+            createRecord(doc.model_visit_record, doc.createVisitationRecord, [title, date, patientID, reason, issue]);
+        }else{
+            res.send("-1");
+        }
+    })
+}
+
 //find and modify health record
 async function modifyHealthRecord(data, userID, res){
     //check if user has health records, if no records upsert
@@ -191,9 +209,6 @@ async function modifyHealthRecord(data, userID, res){
 }
 
 
-
-
-
 module.exports.login = login;
 module.exports.register = register;
 module.exports.createRecord = createRecord;
@@ -201,4 +216,6 @@ module.exports.register_patient = register_patient;
 module.exports.register_organization_child = register_organization_child;
 module.exports.hasPermission = hasPermission;
 module.exports.getRecords = getRecords;
+module.exports.addVisitationRecords = addVisitationRecords;
 module.exports.modifyHealthRecord = modifyHealthRecord;
+

@@ -1,12 +1,12 @@
-# Getting Started with Create React App
-
+# Re-Medi
+Project for CSCI-SHU 410 by Andrew Lee, Andrew Liu, Xin Xiang, Zane Fadul\
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## How to run the app
 
 In the project directory, you can run:
 
-### `npm start`
+### 1. `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,14 +14,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+### 2. `node server.js`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### How to deploy the server
-
-in cmd run command 'node server.js'
+Deploys the server, must be done after `npm start`. Run in a separate terminal.\
 You should receive a message 'Listening to port: {8080}' if there are no errors
 To view the webpage you can go on any browser and acess the page by URL: localhost:8080 or (ip):8080
 
