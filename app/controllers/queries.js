@@ -88,8 +88,8 @@ function register(name, email, password, response, ...parent){
                             ;(async() =>{
                                 await doc.model_user.estimatedDocumentCount({}, function(err, res){
                                     //check if user is org user or patient
-                                    if(parent != null){
-                                        console.log("TEST")
+                                    if(parent.length != 0){
+                                        console.log("TEST");
                                         if(org_array[2] == "Insurance"){
                                             createRecord(doc.model_user, doc.createUser, [org_array[2],,, name, password, email, (res+1).toString().padStart(10,"0"),org_array[1],org_array[0]]);  
                                             // createRecord(doc.model_insr_provider, doc.createProvider, [name,[],[]]);
@@ -107,7 +107,7 @@ function register(name, email, password, response, ...parent){
                                 doc.model_user.findOne({
                                     username:name
                                 }, function(err,id){
-                                    console.log(`${id.userID}: ID registerd`);
+                                    console.log(`${id}: ID registerd`);
                                     if(response != undefined){
                                         response.send(id)
                                     }
