@@ -42,7 +42,7 @@ const schema_health_record = new mongoose.Schema({
         required: [true, "patientID is required"]
     },
     data: {   
-        type: Dict,
+        type: Map,
         required: [true, 'data is required']
     },
 });
@@ -53,7 +53,7 @@ const schema_payment_record = new mongoose.Schema({
         required: [true, "title is required"]
     },
     date: {
-        type: Date
+        type: Date,
         required: [true, "payment date is required"]
     },
     patientID: {

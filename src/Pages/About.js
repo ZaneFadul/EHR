@@ -7,9 +7,9 @@ class About extends Component {
       <div style={{ height: "75vh" }} className="container valign-wrapper">
         <div className="row">
           <div className="col s12 center-align">
-            <h4>Welcome to the Re-medi EHR System!</h4>
+            <h4>Welcome to the Re-Medi EHR System!</h4>
             <p className="flow-text grey-text text-darken-1">
-              hifehfeifhihfiehfiefh iehfeiufheifh
+              CSCI-SHU 410
             </p>
             <br />
             <div className="col s6">

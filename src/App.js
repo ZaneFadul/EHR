@@ -37,7 +37,7 @@ class App extends Component {
     }).then(response => {
       //user login success
       console.log(response);
-      if(response.data != ""){
+      if(response.data !== ""){
         console.log("LOGIN SUCCESS");
         this.setState({
           userID: response.data.userID,
@@ -96,7 +96,7 @@ class App extends Component {
               {this.state.loggedIn ? <Redirect to="/dashboard" /> : <About />}
             </Route>
             <Route path="/dashboard">
-              {this.state.loggedIn ? <Dashboard /> : <Redirect to="/login" />}
+              {this.state.loggedIn ? <Dashboard role={this.state.userType.charAt(0).toLowerCase()+ this.state.userType.slice(1)}/> : <Redirect to="/login" />}
             </Route>
             <Route path="/login">
               {this.state.loggedIn ? (
